@@ -1,0 +1,173 @@
+name: AntiCheatReloaded
+author: Rammelkast
+description: AntiCheatReloaded helps easily identify and block malicious players on your server.
+main: com.rammelkast.anticheatreloaded.AntiCheatReloaded
+api-version: 1.13
+depend: [ProtocolLib]
+softdepend: [Floodgate, floodgate]
+startup: postworld
+version: ${project.build.version}
+commands:
+  anticheat:
+    description: Control and view info about AntiCheatReloaded
+    usage: /anticheat help
+    aliases: acr
+permissions:
+  anticheat.system.notice:
+    description: See broadcasts when a player is kicked or banned for hacking
+  anticheat.system.alert:
+    description: See alerts when a player might be cheating
+  anticheat.system.help:
+    description: Access the help message
+  anticheat.system.mute:
+    description: Access the mute function
+  anticheat.system.report:
+    description: Access cheat reports
+  anticheat.mod:
+    description: Mod helper perm
+    children:
+      anticheat.system.notice: true
+      anticheat.system.alert: true
+      anticheat.system.help: true
+      anticheat.system.report: true
+      anticheat.system.mute: true
+  anticheat.system.log:
+    description: Access turning console logging on or off
+  anticheat.system.reload:
+    description: Access reloading the system
+  anticheat.system.reset:
+    description: Access resetting a player's cheat level
+  anticheat.system.version:
+    description: Access information about whether the system is updated
+  anticheat.admin:
+    description: Admin helper perm
+    children:
+      anticheat.mod: true
+      anticheat.system.log: true
+      anticheat.system.reload: true
+      anticheat.system.reset: true
+      anticheat.system.mute: true
+  anticheat.check.flight:
+    description: Allow players to use fly cheats
+    default: false
+  anticheat.check.elytrafly:
+    description: Allow players to use ElytraFly cheats
+    default: false
+  anticheat.check.waterwalk:
+    description: Allow players to walk on water
+    default: false
+  anticheat.check.fastplace:
+    description: Allow players to use build hacks and fastplace
+    default: false
+  anticheat.check.chatspam:
+    description: Allow players to spam chat messages
+    default: false
+  anticheat.check.commandspam:
+    description: Allow players to spam chat messages
+    default: false
+  anticheat.check.sprint:
+    description: Allow players to sprint when hungry
+    default: false
+  anticheat.check.sneak:
+    description: Allow players to use sneak hacks
+    default: false
+  anticheat.check.speed:
+    description: Allow players to use speed hacks
+    default: false
+  anticheat.check.vclip:
+    description: Allow players clip through walls
+    default: false
+  anticheat.check.spider:
+    description: Allow players to climb non-climbable surfaces
+    default: false
+  anticheat.check.nofall:
+    description: Allow players to avoid fall damage
+    default: false
+  anticheat.check.fastbow:
+    description: Allow players to quickly fire bows
+    default: false
+  anticheat.check.fasteat:
+    description: Allow players to eat food instantly
+    default: false
+  anticheat.check.fastheal:
+    description: Allow players to heal up instantly
+    default: false
+  anticheat.check.killaura:
+    description: Allow players to use killaura
+    default: false
+  anticheat.check.unicode:
+    description: Allow players to use unicode in chat
+    default: false
+  anticheat.check.fastprojectile:
+    description: Allow players to spam projectiles (fastbow etc.)
+    default: false
+  anticheat.check.itemspam:
+    description: Allow players to use inventory drop spam hacks
+    default: false
+  anticheat.check.fastinventory:
+    description: Allow players to use fastloot and similar inventory hacks
+    default: false
+  anticheat.check.morepackets:
+    description: Allow players to send lots of movement packets or modify their timer
+    default: false
+  anticheat.check.badpackets:
+    description: Allow players to send invalid movement packets
+    default: false
+  anticheat.check.velocity:
+    description: Allow players to use knockback prevention
+    default: false
+  anticheat.check.criticals:
+    description: Allow players to use criticals
+    default: false
+  anticheat.check.illegalinteract:
+    description: Allow players to place blocks in illegal places
+    default: false
+  anticheat.check.fastladder:
+    description: Allow players to climb ladders faster
+    default: false
+  anticheat.check.aimbot:
+    description: Allow players to use aimbot
+    default: false
+  anticheat.check.strafe:
+    description: Allow players to use strafe hacks
+    default: false
+  anticheat.check.noslow:
+    description: Allow players to use NoSlow hacks
+    default: false
+  anticheat.check.boatfly:
+    description: Allow players to use boat fly hacks
+    default: false
+  anticheat.check.exempt:
+    description: Total exemption from checks
+    default: false
+    children:
+      anticheat.check.flight: true
+      anticheat.check.elytrafly: true
+      anticheat.check.waterwalk: true
+      anticheat.check.fastplace: true
+      anticheat.check.chatspam: true
+      anticheat.check.commandspam: true
+      anticheat.check.sprint: true
+      anticheat.check.sneak: true
+      anticheat.check.speed: true
+      anticheat.check.vclip: true
+      anticheat.check.spider: true
+      anticheat.check.nofall: true
+      anticheat.check.fastbow: true
+      anticheat.check.fasteat: true
+      anticheat.check.fastheal: true
+      anticheat.check.killaura: true
+      anticheat.check.fastprojectile: true
+      anticheat.check.itemspam: true
+      anticheat.check.fastinventory: true
+      anticheat.check.morepackets: true
+      anticheat.check.badpackets: true
+      anticheat.check.velocity: true
+      anticheat.check.criticals: true
+      anticheat.check.unicode: true
+      anticheat.check.illegalinteract: true
+      anticheat.check.fastladder: true
+      anticheat.check.aimbot: true
+      anticheat.check.strafe: true
+      anticheat.check.noslow: true
+      anticheat.check.boatfly: true

@@ -1,0 +1,19 @@
+# Time to exempt a player from moving because of entering/exiting a vehicle
+# Increase in case of false positives
+ENTERED_EXITED_TIME: 2500
+# Time to exempt a player from moving because of teleporting
+# Increase in case of false positives
+TELEPORT_TIME: 1500
+# Time to exempt a player from moving because of joining the server
+# If your server is slow when a player joins, increasing this value is important
+# Shouldn't be lower than 1500 or higher than 5000
+JOIN_TIME: 2000
+# Time a player is considered to have a change in velocity
+VELOCITY_TIME: 1500
+# Minimum travel distance for move to be considered a teleport and subsequently be ignored
+# This is a set value and shouldn't be changed unless you know what you're doing
+TELEPORT_MIN: 400
+# The change milliseconds between two keepalives before considering a player to be lagging
+# Decrease this in case of clientside lag-related false positives
+# Do not lower below 50 or increase above 75
+LAG_DETERMINATION: 60
