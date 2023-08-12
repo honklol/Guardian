@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +20,7 @@
 
 package com.honklol.guardian.config;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.config.yaml.CommentedConfiguration;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -37,21 +38,21 @@ public class ConfigurationFile {
     private FileConfiguration defaultConfigFile;
     private Configuration config;
 
-    private AntiCheatReloaded plugin;
+    private Guardian plugin;
 
     private boolean saveDefault;
 
     protected boolean needsReload;
 
-    public ConfigurationFile(AntiCheatReloaded plugin, Configuration config, String fileName) {
+    public ConfigurationFile(Guardian plugin, Configuration config, String fileName) {
         this(plugin, config, fileName, true);
     }
 
-    public ConfigurationFile(AntiCheatReloaded plugin, Configuration config, String fileName, boolean saveDefault) {
+    public ConfigurationFile(Guardian plugin, Configuration config, String fileName, boolean saveDefault) {
         this(plugin, config, fileName, saveDefault, new File(plugin.getDataFolder(), fileName));
     }
 
-    public ConfigurationFile(AntiCheatReloaded plugin, Configuration config, String fileName, boolean saveDefault, File rawFile) {
+    public ConfigurationFile(Guardian plugin, Configuration config, String fileName, boolean saveDefault, File rawFile) {
         // Can't change with user editing
         this.plugin = plugin;
         this.config = config;

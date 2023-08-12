@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,14 +27,14 @@ import com.honklol.guardian.manage.CheckManager;
 import com.honklol.guardian.manage.UserManager;
 import org.bukkit.entity.Player;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckType;
 import com.honklol.guardian.util.Group;
 
 public final class AntiCheatAPI {
 	
-    private static final CheckManager CHECK_MANAGER = AntiCheatReloaded.getManager().getCheckManager();
-    private static final UserManager USER_MANAGER = AntiCheatReloaded.getManager().getUserManager();
+    private static final CheckManager CHECK_MANAGER = Guardian.getManager().getCheckManager();
+    private static final UserManager USER_MANAGER = Guardian.getManager().getUserManager();
 
     // CheckManager API
 
@@ -146,7 +147,7 @@ public final class AntiCheatAPI {
      * @return the AntiCheat Manager
      */
     public static AntiCheatManager getManager() {
-        return AntiCheatReloaded.getManager();
+        return Guardian.getManager();
     }
 
 }

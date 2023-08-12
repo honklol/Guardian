@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -51,15 +52,13 @@ import com.honklol.guardian.util.User;
 import com.honklol.guardian.util.VersionLib;
 
 import lombok.Getter;
-
-public final class AntiCheatReloaded extends JavaPlugin {
-
-	public static final String PREFIX = ChatColor.GOLD + "" + ChatColor.BOLD + "Guardian " + ChatColor.DARK_GRAY + "> "
+public final class Guardian extends JavaPlugin {
+	public static final String PREFIX = ChatColor.RED + "" + ChatColor.BOLD + "Guardian " + ChatColor.DARK_GRAY + "> "
 			+ ChatColor.GRAY;
 	public static final List<UUID> MUTE_ENABLED_MODS = new ArrayList<UUID>();
 
 	@Getter
-	private static AntiCheatReloaded plugin;
+	private static Guardian plugin;
 	@Getter
 	private static AntiCheatManager manager;
 	@Getter
@@ -91,7 +90,7 @@ public final class AntiCheatReloaded extends JavaPlugin {
 		// Check for ProtocolLib
 		if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null) {
 			Bukkit.getConsoleSender().sendMessage(PREFIX + ChatColor.RED
-					+ "ProtocolLib not found! AntiCheatReloaded requires ProtocolLib to work, please download and install it.");
+					+ "ProtocolLib not found! Guardian requires ProtocolLib to work, please download and install it.");
 			Bukkit.getPluginManager().disablePlugin(this);
 			return;
 		}
@@ -162,7 +161,7 @@ public final class AntiCheatReloaded extends JavaPlugin {
 			@Override
 			public void run() {
 				try {
-					final Metrics metrics = new Metrics(AntiCheatReloaded.this, 202);
+					final Metrics metrics = new Metrics(Guardian.this, 202);
 					metrics.addCustomChart(new SingleLineChart("cheaters_kicked", new Callable<Integer>() {
 						@Override
 						public Integer call() throws Exception {
@@ -224,7 +223,7 @@ public final class AntiCheatReloaded extends JavaPlugin {
 	private void setupEvents() {
 		for (Listener listener : eventList) {
 			getServer().getPluginManager().registerEvents(listener, this);
-			verboseLog("Registered events for ".concat(listener.toString().split("@")[0].split(".anticheat.")[1]));
+			//verboseLog("Registered events for ".concat(listener.toString().split("@")[0].split(".anticheat.")[1]));
 		}
 	}
 
@@ -303,7 +302,7 @@ public final class AntiCheatReloaded extends JavaPlugin {
 	}
 
 	public static void sendToMainThread(final Runnable runnable) {
-		Bukkit.getScheduler().runTask(AntiCheatReloaded.getPlugin(), runnable);
+		Bukkit.getScheduler().runTask(Guardian.getPlugin(), runnable);
 	}
 
 	public void sendToStaff(final String message) {

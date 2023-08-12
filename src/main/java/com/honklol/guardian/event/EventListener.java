@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +31,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.Backend;
 import com.honklol.guardian.check.CheckType;
 import com.honklol.guardian.config.Configuration;
@@ -42,11 +43,11 @@ import com.honklol.guardian.util.User;
 public class EventListener implements Listener {
 	private static final Map<CheckType, Integer> USAGE_LIST = new EnumMap<CheckType, Integer>(CheckType.class);
 	private static final Map<UUID, Integer> DECREASE_LIST = new HashMap<UUID, Integer>();
-	private static final CheckManager CHECK_MANAGER = AntiCheatReloaded.getManager().getCheckManager();
-	private static final Backend BACKEND = AntiCheatReloaded.getManager().getBackend();
-	private static final AntiCheatReloaded PLUGIN = AntiCheatReloaded.getManager().getPlugin();
-	private static final UserManager USER_MANAGER = AntiCheatReloaded.getManager().getUserManager();
-	private static final Configuration CONFIG = AntiCheatReloaded.getManager().getConfiguration();
+	private static final CheckManager CHECK_MANAGER = Guardian.getManager().getCheckManager();
+	private static final Backend BACKEND = Guardian.getManager().getBackend();
+	private static final Guardian PLUGIN = Guardian.getManager().getPlugin();
+	private static final UserManager USER_MANAGER = Guardian.getManager().getUserManager();
+	private static final Configuration CONFIG = Guardian.getManager().getConfiguration();
 	private static final DecimalFormat TPS_FORMAT = new DecimalFormat("##.##");
 	
 	static {
@@ -69,26 +70,26 @@ public class EventListener implements Listener {
 						+ type.getName() + (subcheck != null ? (" (" + subcheck + ")") : "");
 			} else {
 				message = prefix + player.getName() + " failed "
-						+ type.getName() + (subcheck != null ? (" (" + subcheck + ")") : "") + ChatColor.GOLD + " (x" + vlForType + ")";
+						+ type.getName() + (subcheck != null ? (" (" + subcheck + ")") : "") + ChatColor.RED + " (x" + vlForType + ")";
 			}
 		} else {
 			if (debugMode) {
 				message = prefix + player.getName() + " failed "
 						+ type.getName() + (subcheck != null ? (" (" + subcheck + ")") : "") + ChatColor.DARK_GRAY + " | " + ChatColor.GRAY + message
 						+ ChatColor.DARK_GRAY + " | " + ChatColor.GRAY + "ping: " + user.getPing() + "ms"
-						+ ", tps: " + TPS_FORMAT.format(AntiCheatReloaded.getPlugin().getTPS());
+						+ ", tps: " + TPS_FORMAT.format(Guardian.getPlugin().getTPS());
 			} else {
 				message = prefix
-						+ player.getName() + " failed " + type.getName() + ChatColor.GOLD + " (x" + vlForType + ")"
+						+ player.getName() + " failed " + type.getName() + ChatColor.RED + " (x" + vlForType + ")"
 						+ ChatColor.DARK_GRAY + " | " + ChatColor.GRAY
 						+ (subcheck != null ? ("type: " + subcheck.toLowerCase() + ", ") : "") + "ping: " + user.getPing() + "ms"
-						+ ", tps: " + TPS_FORMAT.format(AntiCheatReloaded.getPlugin().getTPS());
+						+ ", tps: " + TPS_FORMAT.format(Guardian.getPlugin().getTPS());
 			}
 		}
 		
 		logCheat(type, user);
 		if (user.increaseLevel(type) && (!debugMode && vlForType % notifyEveryVl == 0)) {
-			AntiCheatReloaded.getManager().log(message);
+			Guardian.getManager().log(message);
 		}
 		removeDecrease(user);
 
@@ -98,7 +99,7 @@ public class EventListener implements Listener {
 		}
 		
 		if (vlForType % notifyEveryVl == 0) {
-			AntiCheatReloaded.getPlugin().sendToStaff(message);
+			Guardian.getPlugin().sendToStaff(message);
 		}
 	}
 
@@ -165,7 +166,7 @@ public class EventListener implements Listener {
 	}
 
 	public static AntiCheatManager getManager() {
-		return AntiCheatReloaded.getManager();
+		return Guardian.getManager();
 	}
 
 	public static Backend getBackend() {
@@ -176,7 +177,7 @@ public class EventListener implements Listener {
 		return USER_MANAGER;
 	}
 
-	public static AntiCheatReloaded getPlugin() {
+	public static Guardian getPlugin() {
 		return PLUGIN;
 	}
 

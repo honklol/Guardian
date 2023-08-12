@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +25,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.config.providers.Rules;
 import com.honklol.guardian.config.Configuration;
 import com.honklol.guardian.config.ConfigurationTable;
@@ -66,7 +67,7 @@ public class MySQLRulesHolder extends ConfigurationTable implements Rules {
                 if (rule != null) {
                     this.rules.add(rule);
                 } else {
-                    AntiCheatReloaded.getPlugin().getLogger().warning("Couldn't load rule '" + string + "' from the database. Improper format used.");
+                    Guardian.getPlugin().getLogger().warning("Couldn't load rule '" + string + "' from the database. Improper format used.");
                 }
             }
         } catch (SQLException e) {

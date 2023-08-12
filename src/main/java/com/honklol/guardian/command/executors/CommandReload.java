@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,12 +28,12 @@ import com.honklol.guardian.util.Permission;
 
 public class CommandReload extends CommandBase {
 
-    private static final String NAME = "AntiCheatReloaded Reload";
+    private static final String NAME = "Guardian Reload";
     private static final String COMMAND = "reload";
     private static final String USAGE = "anticheat reload";
     private static final Permission PERMISSION = Permission.SYSTEM_RELOAD;
     private static final String[] HELP = {
-            GRAY + "Use: " + AQUA + "/anticheat reload" + GRAY + " to reload AntiCheat settings",
+            GRAY + "Use: " + AQUA + "/guardian reload" + GRAY + " to reload AntiCheat settings",
     };
 
     public CommandReload() {
@@ -42,7 +43,7 @@ public class CommandReload extends CommandBase {
     @Override
     protected void execute(CommandSender cs, String[] args) {
         CONFIG.load();
-        cs.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "ACR " + ChatColor.DARK_GRAY + "> "
+        cs.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Guardian " + ChatColor.DARK_GRAY + "> "
     			+ ChatColor.GRAY + "The configuration was reloaded");
     }
 }

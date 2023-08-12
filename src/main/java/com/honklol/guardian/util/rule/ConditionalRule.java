@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +26,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckType;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -117,8 +118,8 @@ public class ConditionalRule extends Rule {
 			ENGINE = FACTORY.getEngineByName("js");
 		} else {
 			ENGINE = null;
-			Bukkit.getConsoleSender().sendMessage(AntiCheatReloaded.PREFIX + ChatColor.RED
-					+ "Java 15+ currently does not support ACR's rule engine. Rules.yml is disabled.");
+			Bukkit.getConsoleSender().sendMessage(Guardian.PREFIX + ChatColor.RED
+					+ "Java 15+ currently does not support Guardian's rule engine. Rules.yml is disabled.");
 		}
 	}
 }

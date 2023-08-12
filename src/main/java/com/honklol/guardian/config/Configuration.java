@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +25,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.config.files.Config;
 import com.honklol.guardian.config.files.Enterprise;
 import com.honklol.guardian.config.holders.yaml.YamlChecksHolder;
@@ -64,7 +65,7 @@ public class Configuration {
     private ArrayList<ConfigurationFile> flatfiles;
     private ArrayList<ConfigurationTable> dbfiles;
 
-    public Configuration(AntiCheatReloaded plugin, AntiCheatManager manager) {
+    public Configuration(Guardian plugin, AntiCheatManager manager) {
         removeOldFiles();
         this.manager = manager;
         config = new Config(plugin, this);
@@ -171,20 +172,20 @@ public class Configuration {
 
     private void removeOldFiles() {
         ArrayList<String> removed = new ArrayList<String>();
-        File configFile = new File(AntiCheatReloaded.getPlugin().getDataFolder(), "config.yml");
+        File configFile = new File(Guardian.getPlugin().getDataFolder(), "config.yml");
         if (configFile.exists() && YamlConfiguration.loadConfiguration(configFile).getString("System.Auto update") != null) {
-            configFile.renameTo(new File(AntiCheatReloaded.getPlugin().getDataFolder(), "config.old"));
+            configFile.renameTo(new File(Guardian.getPlugin().getDataFolder(), "config.old"));
             removed.add("config.yml has been renamed to config.old and replaced with the new config.yml");
         }
-        File eventsFile = new File(AntiCheatReloaded.getPlugin().getDataFolder(), "events.yml");
+        File eventsFile = new File(Guardian.getPlugin().getDataFolder(), "events.yml");
         if (eventsFile.exists()) {
-            eventsFile.renameTo(new File(AntiCheatReloaded.getPlugin().getDataFolder(), "events.old"));
+            eventsFile.renameTo(new File(Guardian.getPlugin().getDataFolder(), "events.old"));
             removed.add("events.yml has been renamed to events.old and replaced with groups.yml and rules.yml");
         }
         if (removed.size() > 0) {
-            AntiCheatReloaded.getPlugin().getLogger().info("You are upgrading from an old version of AntiCheat. Due to configuration changes, the following files have been modified:");
+            Guardian.getPlugin().getLogger().info("You are upgrading from an old version of AntiCheat. Due to configuration changes, the following files have been modified:");
             for (String s : removed) {
-                AntiCheatReloaded.getPlugin().getLogger().info(s);
+                Guardian.getPlugin().getLogger().info(s);
             }
         }
     }

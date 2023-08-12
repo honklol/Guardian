@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +20,7 @@
 
 package com.honklol.guardian.config.holders.mysql;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.config.providers.Magic;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -50,7 +51,7 @@ public class MySQLMagicHolder extends ConfigurationTable implements InvocationHa
 
     @Override
     public void open() {
-    	InputStreamReader reader = new InputStreamReader(AntiCheatReloaded.getPlugin().getResource("magic.yml"));
+    	InputStreamReader reader = new InputStreamReader(Guardian.getPlugin().getResource("magic.yml"));
         defaults = YamlConfiguration.loadConfiguration(reader);
         try {
 			reader.close();
@@ -103,7 +104,7 @@ public class MySQLMagicHolder extends ConfigurationTable implements InvocationHa
                 } else if (set.getObject("value_double") != null) {
                     doubles.put(key, set.getDouble("value_double"));
                 } else {
-                    AntiCheatReloaded.getPlugin().getLogger().severe("The magic value " + key + " loaded from the database did not have a value configured. Using the default value.");
+                    Guardian.getPlugin().getLogger().severe("The magic value " + key + " loaded from the database did not have a value configured. Using the default value.");
                     for (int i=1;i<=methods.length;i++) {
                         String name = methods[i-1].getName();
                         if (name.equalsIgnoreCase(key)) {
@@ -150,7 +151,7 @@ public class MySQLMagicHolder extends ConfigurationTable implements InvocationHa
                 return value;
             }
         }
-        AntiCheatReloaded.getPlugin().getLogger().severe("The magic value " + key + " couldn't be found.");
+        Guardian.getPlugin().getLogger().severe("The magic value " + key + " couldn't be found.");
         return 0;
     }
 }

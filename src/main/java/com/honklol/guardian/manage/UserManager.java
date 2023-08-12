@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +30,7 @@ import org.bukkit.BanList.Type;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckType;
 import com.honklol.guardian.config.Configuration;
 import com.honklol.guardian.util.Group;
@@ -183,7 +184,7 @@ public final class UserManager {
 	public void execute(final User user, final List<String> actions, final CheckType type, final String kickReason,
 			final List<String> warning, final String banReason) {
 		// Execute synchronously for thread safety when called from AsyncPlayerChatEvent
-		Bukkit.getScheduler().scheduleSyncDelayedTask(AntiCheatReloaded.getPlugin(), new Runnable() {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Guardian.getPlugin(), new Runnable() {
 			@Override
 			public void run() {
 				if (user.getPlayer() == null) {
@@ -210,7 +211,7 @@ public final class UserManager {
 						}
 					} else if (action.equalsIgnoreCase("KICK")) {
 						user.getPlayer().kickPlayer(ChatColor.translateAlternateColorCodes('&', kickReason));
-						AntiCheatReloaded.getPlugin().onPlayerKicked();
+						Guardian.getPlugin().onPlayerKicked();
 						String msg = ChatColor.translateAlternateColorCodes('&',
 								config.getLang().KICK_BROADCAST().replaceAll("%player%", name) + " (" + type.getName()
 										+ ")");

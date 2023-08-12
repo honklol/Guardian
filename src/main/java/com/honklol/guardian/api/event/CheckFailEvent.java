@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +27,7 @@ import com.honklol.guardian.check.CheckType;
 import com.honklol.guardian.util.User;
 
 /**
- * Fired when a player fails an AntiCheatReloaded check
+ * Fired when a player fails an Guardian check
  */
 public final class CheckFailEvent extends Event {
 

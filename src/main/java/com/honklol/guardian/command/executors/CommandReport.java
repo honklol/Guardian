@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +28,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckType;
 import com.honklol.guardian.command.CommandBase;
 import com.honklol.guardian.util.Group;
@@ -37,14 +38,14 @@ import com.honklol.guardian.util.Utilities;
 
 public class CommandReport extends CommandBase {
 
-	private static final String NAME = "AntiCheatReloaded Reports";
+	private static final String NAME = "Guardian Reports";
 	private static final String COMMAND = "report";
 	private static final String USAGE = "anticheat report [group/user]";
 	private static final Permission PERMISSION = Permission.SYSTEM_REPORT;
 	private static final String[] HELP = {
-			GRAY + "Use: " + GOLD + "/anticheat report [group]" + GRAY + " to see all users in a given group",
-			GRAY + "Use: " + GOLD + "/anticheat report [user]" + GRAY + " to see a single user's report",
-			GRAY + "Use: " + GOLD + "/anticheat report [user/group] [num]" + GRAY + " to see pages of a report", };
+			GRAY + "Use: " + RED + "/guardian report [group]" + GRAY + " to see all users in a given group",
+			GRAY + "Use: " + RED + "/guardian report [user]" + GRAY + " to see a single user's report",
+			GRAY + "Use: " + RED + "/guardian report [user/group] [num]" + GRAY + " to see pages of a report", };
 
 	public CommandReport() {
 		super(NAME, COMMAND, USAGE, HELP, PERMISSION);
@@ -70,7 +71,7 @@ public class CommandReport extends CommandBase {
 					int numPlayers = USER_MANAGER.getUsersInGroup(g).size();
 					cs.sendMessage(g.getColor() + g.getName() + WHITE + ": " + numPlayers + " players");
 				}
-				cs.sendMessage(GRAY + "Use " + GOLD + "/anticheat report [group]" + GRAY
+				cs.sendMessage(GRAY + "Use " + RED + "/guardian report [group]" + GRAY
 						+ " for a list of players in each group.");
 			} else {
 				// Test groups
@@ -89,7 +90,7 @@ public class CommandReport extends CommandBase {
 					return;
 				}
 
-				User user = AntiCheatReloaded.getManager().getUserManager().getUser(targetPlayer.getUniqueId());
+				User user = Guardian.getManager().getUserManager().getUser(targetPlayer.getUniqueId());
 				if (user != null) {
 					playerReport(cs, user, page);
 					return;
@@ -108,7 +109,7 @@ public class CommandReport extends CommandBase {
 		String groupName = group == null ? "Low" : group.getName();
 		int pages = (int) Math.ceil(((float) users.size()) / 7);
 		if (page <= pages && page > 0) {
-			cs.sendMessage(GOLD + "----------------------[" + WHITE + "Page " + page + "/" + pages + "" + GOLD
+			cs.sendMessage(RED + "----------------------[" + WHITE + "Page " + page + "/" + pages + "" + RED
 					+ "]----------------------");
 			cs.sendMessage(GRAY + "Group: " + color + groupName);
 			for (int x = 0; x < 7; x++) {
@@ -121,7 +122,7 @@ public class CommandReport extends CommandBase {
 			cs.sendMessage(MENU_END);
 		} else {
 			if (pages == 0) {
-				cs.sendMessage(GOLD + "----------------------[" + WHITE + "Page 1/1" + GOLD + "]----------------------");
+				cs.sendMessage(RED + "----------------------[" + WHITE + "Page 1/1" + RED + "]----------------------");
 				cs.sendMessage(GRAY + "Group: " + color + groupName);
 				cs.sendMessage(GRAY + "There are no users in this group.");
 				cs.sendMessage(MENU_END);
@@ -152,7 +153,7 @@ public class CommandReport extends CommandBase {
 		groupString += " (" + user.getLevel() + ")";
 
 		if (page <= pages && page > 0) {
-			cs.sendMessage(GOLD + "----------------------[" + WHITE + "Page " + page + "/" + pages + "" + GOLD
+			cs.sendMessage(RED + "----------------------[" + WHITE + "Page " + page + "/" + pages + "" + RED
 					+ "]----------------------");
 			cs.sendMessage(GRAY + "Player: " + WHITE + name);
 			int ping = user.getPing();
@@ -177,7 +178,7 @@ public class CommandReport extends CommandBase {
 			cs.sendMessage(MENU_END);
 		} else {
 			if (pages == 0 && page == 1) {
-				cs.sendMessage(GOLD + "----------------------[" + WHITE + "Page 1/1" + GOLD + "]----------------------");
+				cs.sendMessage(RED + "----------------------[" + WHITE + "Page 1/1" + RED + "]----------------------");
 				cs.sendMessage(GRAY + "Player: " + WHITE + name);
 				int ping = user.getPing();
 				cs.sendMessage(GRAY + "Ping: " + ((ping == -1) ? (RED + "Offline")

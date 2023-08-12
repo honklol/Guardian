@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,18 +25,18 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.command.CommandBase;
 import com.honklol.guardian.util.Permission;
 
 public class CommandMute extends CommandBase {
 
-	private static final String NAME = "AntiCheatReloaded Mute";
+	private static final String NAME = "Guardian Mute";
 	private static final String COMMAND = "mute";
 	private static final String USAGE = "anticheat mute";
 	private static final Permission PERMISSION = Permission.SYSTEM_MUTE;
 	private static final String[] HELP = {
-			GRAY + "Use: " + AQUA + "/anticheat mute" + GRAY + " to mute all notifications", };
+			GRAY + "Use: " + AQUA + "/guardian mute" + GRAY + " to mute all notifications", };
 
 	public CommandMute() {
 		super(NAME, COMMAND, USAGE, HELP, PERMISSION);
@@ -44,17 +45,17 @@ public class CommandMute extends CommandBase {
 	@Override
 	protected void execute(CommandSender cs, String[] args) {
 		if (!(cs instanceof Player)) {
-			cs.sendMessage(ChatColor.BOLD + "" + GOLD + "ACR " + GRAY + "This command is only for players");
+			cs.sendMessage(ChatColor.BOLD + "" + RED + "Guardian " + GRAY + "This command is only for players");
 			return;
 		}
 		UUID uuid = ((Player) cs).getUniqueId();
-		if (AntiCheatReloaded.MUTE_ENABLED_MODS.contains(uuid)) {
-			cs.sendMessage(GOLD + "" + ChatColor.BOLD + "ACR " + GRAY + "Player alerts have been unmuted");
-			AntiCheatReloaded.MUTE_ENABLED_MODS.remove(uuid);
+		if (Guardian.MUTE_ENABLED_MODS.contains(uuid)) {
+			cs.sendMessage(RED + "" + ChatColor.BOLD + "Guardian " + GRAY + "Player alerts have been unmuted");
+			Guardian.MUTE_ENABLED_MODS.remove(uuid);
 			return;
 		} else {
-			cs.sendMessage(GOLD + "" + ChatColor.BOLD + "ACR " + GRAY + "Player alerts have been muted");
-			AntiCheatReloaded.MUTE_ENABLED_MODS.add(uuid);
+			cs.sendMessage(RED + "" + ChatColor.BOLD + "Guardian " + GRAY + "Player alerts have been muted");
+			Guardian.MUTE_ENABLED_MODS.add(uuid);
 			return;
 		}
 	}

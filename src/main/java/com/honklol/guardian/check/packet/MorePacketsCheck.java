@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +28,7 @@ import com.honklol.guardian.event.EventListener;
 import org.bukkit.entity.Player;
 
 import com.comphenix.protocol.events.PacketEvent;
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckResult;
 import com.honklol.guardian.check.CheckType;
 import com.honklol.guardian.config.providers.Checks;
@@ -49,18 +50,18 @@ public final class MorePacketsCheck {
 		}
 		
 		// Confirm if we should even check for MorePackets
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
-		final double tps = AntiCheatReloaded.getPlugin().getTPS();
-		if (!AntiCheatReloaded.getManager().getCheckManager().willCheck(player, CheckType.MOREPACKETS)
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
+		final double tps = Guardian.getPlugin().getTPS();
+		if (!Guardian.getManager().getCheckManager().willCheck(player, CheckType.MOREPACKETS)
 				|| tps < checksConfig.getDouble(CheckType.MOREPACKETS, "minimumTps")) {
 			return;
 		}
 
 		final UUID uuid = player.getUniqueId();
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(uuid);
+		final User user = Guardian.getManager().getUserManager().getUser(uuid);
 		final int maxPing = checksConfig.getInteger(CheckType.MOREPACKETS, "maxPing");
 		final boolean disableForLagging = checksConfig.getBoolean(CheckType.MOREPACKETS, "disableForLagging");
-		if (AntiCheatReloaded.getManager().getBackend().isDoing(player, EXEMPT_TIMINGS, -1)
+		if (Guardian.getManager().getBackend().isDoing(player, EXEMPT_TIMINGS, -1)
 				|| (maxPing > 0 && user.getPing() > maxPing) || (disableForLagging && user.isLagging())) {
 			return;
 		}
@@ -90,7 +91,7 @@ public final class MorePacketsCheck {
 	private static void flag(final Player player, final PacketEvent event, final String message) {
 		event.setCancelled(true);
 		// We are currently not in the main server thread, so switch
-		AntiCheatReloaded.sendToMainThread(new Runnable() {
+		Guardian.sendToMainThread(new Runnable() {
 			@Override
 			public void run() {
 				EventListener.log(new CheckResult(CheckResult.Result.FAILED, message).getMessage(), player,
@@ -102,7 +103,7 @@ public final class MorePacketsCheck {
 
 	public static void compensate(final Player player) {
 		final UUID uuid = player.getUniqueId();
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 		final double packetBalance = PACKET_BALANCE.getOrDefault(uuid, 0D);
 		PACKET_BALANCE.put(uuid, packetBalance - checksConfig.getInteger(CheckType.MOREPACKETS, "teleportCompensation"));
 	}

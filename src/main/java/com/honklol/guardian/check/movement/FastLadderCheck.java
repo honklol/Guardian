@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +25,7 @@ import java.util.UUID;
 
 import org.bukkit.entity.Player;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckResult;
 import com.honklol.guardian.check.CheckResult.Result;
 import com.honklol.guardian.check.CheckType;
@@ -47,7 +48,7 @@ public final class FastLadderCheck {
 		}
 
 		int vlCount = VIOLATIONS.getOrDefault(player.getUniqueId(), 0);
-		Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 		int vlBeforeFlag = checksConfig.getInteger(CheckType.FASTLADDER, "vlBeforeFlag");
 		if (y > 0) {
 			// Check moving up

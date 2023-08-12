@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +25,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckResult;
 import com.honklol.guardian.check.CheckResult.Result;
 import com.honklol.guardian.check.CheckType;
@@ -40,7 +41,7 @@ public final class WaterWalkCheck {
 
 	public static CheckResult runCheck(final Player player, final double x, final double y, final double z) {
 		final UUID uuid = player.getUniqueId();
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(uuid);
+		final User user = Guardian.getManager().getUserManager().getUser(uuid);
 		final MovementManager movementManager = user.getMovementManager();
 
 		if (movementManager.distanceXZ <= 0 || player.getVehicle() != null || Utilities.isOnLilyPad(player) || Utilities.isOnCarpet(player)
@@ -48,7 +49,7 @@ public final class WaterWalkCheck {
 			return PASS;
 		}
 
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 		final Block blockBeneath = player.getLocation().clone().subtract(0, 0.1, 0).getBlock();
 		if (checksConfig.isSubcheckEnabled(CheckType.WATER_WALK, "walk") && blockBeneath.isLiquid()
 				&& Utilities.isSurroundedByWater(player)

@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.combat.KillAuraCheck;
 import com.honklol.guardian.check.combat.VelocityCheck;
 import com.honklol.guardian.check.movement.ElytraCheck;
@@ -215,11 +216,11 @@ public class Backend {
 	}
 
 	public CheckResult checkSneakToggle(final Player player) {
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(player.getUniqueId());
+		final User user = Guardian.getManager().getUserManager().getUser(player.getUniqueId());
 		final long lastSneak = this.lastSneak.getOrDefault(player.getUniqueId(), (long) 0);
 		this.lastSneak.put(player.getUniqueId(), System.currentTimeMillis());
 		if (System.currentTimeMillis() - lastSneak < checksConfig.getInteger(CheckType.SNEAK, "minToggleTime")
-				&& (AntiCheatReloaded.getPlugin().getTPS() > checksConfig.getInteger(CheckType.SNEAK, "minimumTps"))) {
+				&& (Guardian.getPlugin().getTPS() > checksConfig.getInteger(CheckType.SNEAK, "minimumTps"))) {
 			if (user.isLagging() && checksConfig.getBoolean(CheckType.SNEAK, "disableForLagging")) {
 				return PASS;
 			}
@@ -432,10 +433,10 @@ public class Backend {
 	}
 
 	public CheckResult checkFastHeal(final Player player) {
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(player.getUniqueId());
+		final User user = Guardian.getManager().getUserManager().getUser(player.getUniqueId());
 		if (lastHeal.containsKey(player.getUniqueId())) // Otherwise it was modified by a plugin, don't worry about it.
 		{
-			final double tps = AntiCheatReloaded.getPlugin().getTPS();
+			final double tps = Guardian.getPlugin().getTPS();
 			if (tps < checksConfig.getDouble(CheckType.FAST_HEAL, "minimumTps")
 					|| (user.isLagging() && checksConfig.getBoolean(CheckType.FAST_HEAL, "disableForLagging"))) {
 				return PASS;
@@ -455,10 +456,10 @@ public class Backend {
 	}
 
 	public CheckResult checkFastEat(final Player player) {
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(player.getUniqueId());
+		final User user = Guardian.getManager().getUserManager().getUser(player.getUniqueId());
 		if (startEat.containsKey(player.getUniqueId())) // Otherwise it was modified by a plugin, don't worry about it.
 		{
-			if (AntiCheatReloaded.getPlugin().getTPS() < 17.5 || user.isLagging()) {
+			if (Guardian.getPlugin().getTPS() < 17.5 || user.isLagging()) {
 				return PASS;
 			}
 			final long l = startEat.get(player.getUniqueId());

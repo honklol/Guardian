@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +24,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckResult;
 import com.honklol.guardian.check.CheckResult.Result;
 import com.honklol.guardian.check.CheckType;
@@ -51,14 +52,14 @@ public final class StrafeCheck {
 			return PASS;
 		}
 
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(player.getUniqueId());
+		final User user = Guardian.getManager().getUserManager().getUser(player.getUniqueId());
 		final MovementManager movementManager = user.getMovementManager();
 		final VelocityTracker velocityTracker = user.getVelocityTracker();
 		if (velocityTracker.isVelocitized()) {
 			return PASS;
 		}
 
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 
 		if (System.currentTimeMillis() - movementManager.lastTeleport <= checksConfig.getInteger(CheckType.STRAFE,
 				"accountForTeleports") || movementManager.elytraEffectTicks >= 20

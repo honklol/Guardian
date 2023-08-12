@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +30,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.util.Vector;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckResult;
 import com.honklol.guardian.check.CheckType;
 import com.honklol.guardian.check.combat.KillAuraCheck;
@@ -43,7 +44,7 @@ public final class IllegalInteractCheck {
 	private static final CheckResult PASS = new CheckResult(CheckResult.Result.PASSED);
 
 	public static CheckResult runCheck(final Player player, final Event event) {
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 		if (event instanceof BlockPlaceEvent && checksConfig.isSubcheckEnabled(CheckType.ILLEGAL_INTERACT, "place")) {
 			return checkBlockPlace(player, (BlockPlaceEvent) event);
 		} else if (event instanceof BlockBreakEvent
@@ -57,8 +58,8 @@ public final class IllegalInteractCheck {
 	}
 
 	private static CheckResult checkInteract(final Player player, final PlayerInteractEvent event) {
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(player.getUniqueId());
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final User user = Guardian.getManager().getUserManager().getUser(player.getUniqueId());
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 		final double distance = player.getEyeLocation().toVector()
 				.distance(event.getClickedBlock().getLocation().toVector());
 		double maxDistance = player.getGameMode() == GameMode.CREATIVE
@@ -102,7 +103,7 @@ public final class IllegalInteractCheck {
 	}
 
 	private static boolean isValidTarget(final Player player, final Block block) {
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 		final double distance = player.getGameMode() == GameMode.CREATIVE ? 6.0
 				: player.getLocation().getDirection().getY() > 0.9 ? 6.0 : 5.5;
 		final Block targetBlock = VersionLib.getTargetBlock(player, ((int) Math.ceil(distance)));

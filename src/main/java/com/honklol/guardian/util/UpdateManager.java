@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +26,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 
 public class UpdateManager {
 
@@ -51,7 +52,7 @@ public class UpdateManager {
 		
 		int splitCompare = 0;
 		try {
-			VersionSplit currentSplit = new VersionSplit(AntiCheatReloaded.getVersion());
+			VersionSplit currentSplit = new VersionSplit(Guardian.getVersion());
 			VersionSplit newSplit = new VersionSplit(this.latestVersion);
 			splitCompare = currentSplit.compareTo(newSplit);
 		} catch (Exception e) {}
@@ -92,7 +93,7 @@ public class UpdateManager {
 	}
 	
 	public String getCurrentVersion() {
-		return AntiCheatReloaded.getVersion();
+		return Guardian.getVersion();
 	}
 
 	public String getLatestVersion() {

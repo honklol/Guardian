@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +31,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
 import com.cryptomorin.xseries.XMaterial;
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.Backend;
 import com.honklol.guardian.check.CheckResult;
 import com.honklol.guardian.check.CheckType;
@@ -66,18 +67,18 @@ public final class SpeedCheck {
 	 * TODO fix falses with entity collisions
 	 */
 	public static CheckResult checkPredict(final Player player, final Location movingTowards) {
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 		if (!checksConfig.isSubcheckEnabled(CheckType.SPEED, "predict")) {
 			return PASS;
 		}
 		
-		final Backend backend = AntiCheatReloaded.getManager().getBackend();
+		final Backend backend = Guardian.getManager().getBackend();
 		if (isSpeedExempt(player, backend) || player.getVehicle() != null || Utilities.isInWater(player)
 				|| Utilities.isInWeb(player)) {
 			return PASS;
 		}
 		
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(player.getUniqueId());
+		final User user = Guardian.getManager().getUserManager().getUser(player.getUniqueId());
 		final UUID uuid = player.getUniqueId();
 		final MovementManager movementManager = user.getMovementManager();
 		final VelocityTracker velocityTracker = user.getVelocityTracker();
@@ -125,12 +126,12 @@ public final class SpeedCheck {
 	}
 	
 	public static CheckResult checkXZSpeed(final Player player, final Location movingTowards) {
-		final Backend backend = AntiCheatReloaded.getManager().getBackend();
+		final Backend backend = Guardian.getManager().getBackend();
 		if (isSpeedExempt(player, backend) || player.getVehicle() != null || Utilities.isInWater(player)) {
 			return PASS;
 		}
 
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(player.getUniqueId());
+		final User user = Guardian.getManager().getUserManager().getUser(player.getUniqueId());
 		final UUID uuid = player.getUniqueId();
 		final MovementManager movementManager = user.getMovementManager();
 		final VelocityTracker velocityTracker = user.getVelocityTracker();
@@ -140,7 +141,7 @@ public final class SpeedCheck {
 			return PASS;
 		}
 		
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 		final double distanceXZ = movementManager.distanceXZ;
 		final boolean boxedIn = movementManager.topSolid && movementManager.bottomSolid;
 
@@ -449,13 +450,13 @@ public final class SpeedCheck {
 	}
 
 	public static CheckResult checkVerticalSpeed(final Player player, final Distance distance) {
-		final Backend backend = AntiCheatReloaded.getManager().getBackend();
+		final Backend backend = Guardian.getManager().getBackend();
 		if (isSpeedExempt(player, backend) || player.getVehicle() != null || player.isSleeping()
 				|| Utilities.isNearWater(player)) {
 			return PASS;
 		}
 
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(player.getUniqueId());
+		final User user = Guardian.getManager().getUserManager().getUser(player.getUniqueId());
 		final MovementManager movementManager = user.getMovementManager();
 		final VelocityTracker velocityTracker = user.getVelocityTracker();
 		// Riptiding exemption
@@ -463,7 +464,7 @@ public final class SpeedCheck {
 			return PASS;
 		}
 
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 		if (!checksConfig.isSubcheckEnabled(CheckType.SPEED, "verticalSpeed")) {
 			return PASS;
 		}

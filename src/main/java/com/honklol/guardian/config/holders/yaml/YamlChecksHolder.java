@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +23,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckType;
 import com.honklol.guardian.config.Configuration;
 import com.honklol.guardian.config.ConfigurationFile;
@@ -32,7 +33,7 @@ public class YamlChecksHolder extends ConfigurationFile implements Checks {
 
     public static final String FILENAME = "checks.yml";
 
-    public YamlChecksHolder(AntiCheatReloaded plugin, Configuration config) {
+    public YamlChecksHolder(Guardian plugin, Configuration config) {
         super(plugin, config, FILENAME);
     }
 
@@ -45,7 +46,7 @@ public class YamlChecksHolder extends ConfigurationFile implements Checks {
 	public boolean getBoolean(CheckType checkType, String subcheck, String name) {
 		final ConfigurationSection section = this.getConfigFile().getConfigurationSection(checkType.getName().toLowerCase()).getConfigurationSection(subcheck);
 		if (!section.contains(name)) {
-			AntiCheatReloaded.getPlugin().getLogger().warning("Configuration is missing option '" + section.getCurrentPath() + "." + name + "'");
+			Guardian.getPlugin().getLogger().warning("Configuration is missing option '" + section.getCurrentPath() + "." + name + "'");
 			return false;
 		}
 		return section.getBoolean(name);
@@ -60,7 +61,7 @@ public class YamlChecksHolder extends ConfigurationFile implements Checks {
 	public double getDouble(CheckType checkType, String subcheck, String name) {
 		final ConfigurationSection section = this.getConfigFile().getConfigurationSection(checkType.getName().toLowerCase()).getConfigurationSection(subcheck);
 		if (!section.contains(name)) {
-			AntiCheatReloaded.getPlugin().getLogger().warning("Configuration is missing option '" + section.getCurrentPath() + "." + name + "'");
+			Guardian.getPlugin().getLogger().warning("Configuration is missing option '" + section.getCurrentPath() + "." + name + "'");
 			return 0.0D;
 		}
 		return section.getDouble(name);
@@ -70,7 +71,7 @@ public class YamlChecksHolder extends ConfigurationFile implements Checks {
 	public int getInteger(CheckType checkType, String subcheck, String name) {
 		final ConfigurationSection section = this.getConfigFile().getConfigurationSection(checkType.getName().toLowerCase()).getConfigurationSection(subcheck);
 		if (!section.contains(name)) {
-			AntiCheatReloaded.getPlugin().getLogger().warning("Configuration is missing option '" + section.getCurrentPath() + "." + name + "'");
+			Guardian.getPlugin().getLogger().warning("Configuration is missing option '" + section.getCurrentPath() + "." + name + "'");
 			return 0;
 		}
 		return section.getInt(name);
@@ -80,7 +81,7 @@ public class YamlChecksHolder extends ConfigurationFile implements Checks {
 	public boolean getBoolean(CheckType checkType, String name) {
 		final ConfigurationSection section =  this.getConfigFile().getConfigurationSection(checkType.getName().toLowerCase());
 		if (!section.contains(name)) {
-			AntiCheatReloaded.getPlugin().getLogger().warning("Configuration is missing option '" + section.getCurrentPath() + "." + name + "'");
+			Guardian.getPlugin().getLogger().warning("Configuration is missing option '" + section.getCurrentPath() + "." + name + "'");
 			return false;
 		}
 		return section.getBoolean(name);
@@ -90,7 +91,7 @@ public class YamlChecksHolder extends ConfigurationFile implements Checks {
 	public double getDouble(CheckType checkType, String name) {
 		final ConfigurationSection section =  this.getConfigFile().getConfigurationSection(checkType.getName().toLowerCase());
 		if (!section.contains(name)) {
-			AntiCheatReloaded.getPlugin().getLogger().warning("Configuration is missing option '" + section.getCurrentPath() + "." + name + "'");
+			Guardian.getPlugin().getLogger().warning("Configuration is missing option '" + section.getCurrentPath() + "." + name + "'");
 			return 0.0D;
 		}
 		return section.getDouble(name);
@@ -100,7 +101,7 @@ public class YamlChecksHolder extends ConfigurationFile implements Checks {
 	public int getInteger(CheckType checkType, String name) {
 		final ConfigurationSection section =  this.getConfigFile().getConfigurationSection(checkType.getName().toLowerCase());
 		if (!section.contains(name)) {
-			AntiCheatReloaded.getPlugin().getLogger().warning("Configuration is missing option '" + section.getCurrentPath() + "." + name + "'");
+			Guardian.getPlugin().getLogger().warning("Configuration is missing option '" + section.getCurrentPath() + "." + name + "'");
 			return 0;
 		}
 		return section.getInt(name);
@@ -110,7 +111,7 @@ public class YamlChecksHolder extends ConfigurationFile implements Checks {
 	public boolean isEnabled(CheckType checkType) {
 		// If the root of a check has no enabled or disabled option, it has to be configured on a subcheck basis
 		if (!this.getConfigFile().isConfigurationSection(checkType.getName().toLowerCase())) {
-			Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "ACR " + ChatColor.RED
+			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Guardian " + ChatColor.RED
 					+ "Missing configuration settings for " + checkType.getName() + "!");
 			return true;
 		}

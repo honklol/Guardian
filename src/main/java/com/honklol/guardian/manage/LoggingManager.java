@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +24,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.config.Configuration;
 import com.honklol.guardian.util.FileFormatter;
 import com.honklol.guardian.util.Permission;
@@ -43,15 +44,15 @@ public class LoggingManager {
     private static List<String> logs = new CopyOnWriteArrayList<String>();
     private final Configuration config;
 
-    public LoggingManager(AntiCheatReloaded plugin, Logger logger, Configuration config) {
-        this.fileLogger = Logger.getLogger("com.honklol.guardian.AntiCheatReloaded");
+    public LoggingManager(Guardian plugin, Logger logger, Configuration config) {
+        this.fileLogger = Logger.getLogger("com.honklol.guardian.Guardian");
         this.config = config;
         try {
             File file = new File(plugin.getDataFolder(), "log");
             if (!file.exists()) {
                 file.mkdir();
             }
-            fileHandler = new FileHandler(plugin.getDataFolder() + "/log/anticheat.log", true);
+            fileHandler = new FileHandler(plugin.getDataFolder() + "/log/guardian.log", true);
             fileHandler.setFormatter(new FileFormatter());
         } catch (Exception ex) {
             logger.log(Level.SEVERE, null, ex);
@@ -71,7 +72,7 @@ public class LoggingManager {
     }
 
     public void debugLog(String message) {
-        Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "ACR " + ChatColor.GRAY + message);
+        Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Guardian " + ChatColor.GRAY + message);
         logToLogs(message);
     }
 

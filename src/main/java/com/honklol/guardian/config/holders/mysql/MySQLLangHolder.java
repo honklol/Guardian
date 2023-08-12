@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +20,7 @@
 
 package com.honklol.guardian.config.holders.mysql;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.config.providers.Lang;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -53,7 +54,7 @@ public class MySQLLangHolder extends ConfigurationTable implements InvocationHan
 
     @Override
     public void open() {
-    	InputStreamReader reader = new InputStreamReader(AntiCheatReloaded.getPlugin().getResource("lang.yml"));
+    	InputStreamReader reader = new InputStreamReader(Guardian.getPlugin().getResource("lang.yml"));
         defaults = YamlConfiguration.loadConfiguration(reader);
         try {
 			reader.close();
@@ -151,7 +152,7 @@ public class MySQLLangHolder extends ConfigurationTable implements InvocationHan
                 return value;
             }
         }
-        AntiCheatReloaded.getPlugin().getLogger().severe("The lang value " + key + " couldn't be found.");
+        Guardian.getPlugin().getLogger().severe("The lang value " + key + " couldn't be found.");
         return "Language error. See console for details.";
     }
 

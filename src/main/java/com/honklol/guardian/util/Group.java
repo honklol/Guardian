@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +20,7 @@
 
 package com.honklol.guardian.util;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
@@ -41,9 +42,9 @@ public class Group {
 
 		ChatColor c = ChatColor.valueOf(color);
 		if (c == null) {
-			AntiCheatReloaded.getPlugin().getLogger()
+			Guardian.getPlugin().getLogger()
 					.warning("Event '" + name + "' was initialized with the color '" + color + "' which is invalid.");
-			AntiCheatReloaded.getPlugin().getLogger().warning(
+			Guardian.getPlugin().getLogger().warning(
 					"This event will not run properly. See http://jd.bukkit.org/apidocs/org/bukkit/ChatColor.html#enum_constant_summary for a list of valid colors");
 		} else {
 			this.color = c;
@@ -78,11 +79,11 @@ public class Group {
 				throw new Exception();
 			}
 		} catch (Exception ex) {
-			AntiCheatReloaded.getPlugin().getLogger()
+			Guardian.getPlugin().getLogger()
 					.warning("An event was initialized with an invalid string: '" + string + "'");
-			AntiCheatReloaded.getPlugin().getLogger().warning(
+			Guardian.getPlugin().getLogger().warning(
 					"The proper format is: 'name : threshold : color : action' such as 'High : 50 : RED : KICK'");
-			AntiCheatReloaded.getPlugin().getLogger().warning("This event will NOT run. (" + ex.getMessage() + ")");
+			Guardian.getPlugin().getLogger().warning("This event will NOT run. (" + ex.getMessage() + ")");
 			return null;
 		}
 	}

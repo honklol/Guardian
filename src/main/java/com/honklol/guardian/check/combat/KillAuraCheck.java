@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.config.providers.Checks;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameMode;
@@ -68,8 +69,8 @@ public final class KillAuraCheck {
 			return PASS;
 		}
 
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(player.getUniqueId());
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final User user = Guardian.getManager().getUserManager().getUser(player.getUniqueId());
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 
 		// Check if enabled
 		if (!checksConfig.isSubcheckEnabled(CheckType.KILLAURA, "reach")) {
@@ -92,7 +93,7 @@ public final class KillAuraCheck {
 			allowedReach += lagExtraReach;
 		}
 		if (target instanceof Player) {
-			final User targetUser = AntiCheatReloaded.getManager().getUserManager().getUser(target.getUniqueId());
+			final User targetUser = Guardian.getManager().getUserManager().getUser(target.getUniqueId());
 			allowedReach += targetUser.getPing() * pingCompensation;
 			if (targetUser.isLagging()) {
 				allowedReach += lagExtraReach;
@@ -119,7 +120,7 @@ public final class KillAuraCheck {
 			return PASS;
 		}
 
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 
 		// Check if enabled
 		if (!checksConfig.isSubcheckEnabled(CheckType.KILLAURA, "angle")) {
@@ -157,16 +158,16 @@ public final class KillAuraCheck {
 
 	public static CheckResult checkPacketOrder(final Player player, final Entity entity) {
 		final UUID uuid = player.getUniqueId();
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(uuid);
+		final User user = Guardian.getManager().getUserManager().getUser(uuid);
 		final MovementManager movementManager = user.getMovementManager();
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 
 		// Check if enabled
 		if (!checksConfig.isSubcheckEnabled(CheckType.KILLAURA, "packetOrder")) {
 			return PASS;
 		}
 
-		if (user.isLagging() || (System.currentTimeMillis() - movementManager.lastTeleport) <= 100 || AntiCheatReloaded
+		if (user.isLagging() || (System.currentTimeMillis() - movementManager.lastTeleport) <= 100 || Guardian
 				.getPlugin().getTPS() < checksConfig.getDouble(CheckType.KILLAURA, "packetOrder", "minimumTps")) {
 			return PASS;
 		}
@@ -193,9 +194,9 @@ public final class KillAuraCheck {
 
 	public static CheckResult checkVariance(final Player player) {
 		final UUID uuid = player.getUniqueId();
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(uuid);
+		final User user = Guardian.getManager().getUserManager().getUser(uuid);
 		final MovementManager movementManager = user.getMovementManager();
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 
 		// Check if enabled
 		if (!checksConfig.isSubcheckEnabled(CheckType.KILLAURA, "variance")) {
@@ -224,9 +225,9 @@ public final class KillAuraCheck {
 
 	public static CheckResult checkRepeatedAim(final Player player) {
 		final UUID uuid = player.getUniqueId();
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(uuid);
+		final User user = Guardian.getManager().getUserManager().getUser(uuid);
 		final MovementManager movementManager = user.getMovementManager();
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 
 		// Check if enabled
 		if (!checksConfig.isSubcheckEnabled(CheckType.KILLAURA, "repeatedAim")) {
@@ -256,9 +257,9 @@ public final class KillAuraCheck {
 		}
 			
 		final UUID uuid = player.getUniqueId();
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(uuid);
+		final User user = Guardian.getManager().getUserManager().getUser(uuid);
 		final MovementManager movementManager = user.getMovementManager();
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 
 		// Check if enabled
 		if (!checksConfig.isSubcheckEnabled(CheckType.KILLAURA, "throughWalls")) {
@@ -266,7 +267,7 @@ public final class KillAuraCheck {
 		}
 
 		if ((user.isLagging() && checksConfig.getBoolean(CheckType.KILLAURA, "throughWalls", "disableForLagging"))
-				|| (System.currentTimeMillis() - movementManager.lastTeleport) <= 100 || AntiCheatReloaded.getPlugin()
+				|| (System.currentTimeMillis() - movementManager.lastTeleport) <= 100 || Guardian.getPlugin()
 						.getTPS() < checksConfig.getDouble(CheckType.KILLAURA, "throughWalls", "minimumTps")) {
 			return PASS;
 		}

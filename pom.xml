@@ -55,15 +55,15 @@
                             <relocations>
                                 <relocation>
                                     <pattern>org.bstats</pattern>
-                                    <shadedPattern>com.rammelkast.anticheatreloaded.util</shadedPattern>
+                                    <shadedPattern>com.honklol.guardian.util</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>com.cryptomorin.xseries</pattern>
-                                    <shadedPattern>com.rammelkast.anticheatreloaded.util</shadedPattern>
+                                    <shadedPattern>com.honklol.guardian.util</shadedPattern>
                                 </relocation>
                                 <relocation>
                                     <pattern>com.github.juliarn.npc</pattern>
-                                    <shadedPattern>com.rammelkast.anticheatreloaded.util.npc</shadedPattern>
+                                    <shadedPattern>com.honklol.guardian.util.npc</shadedPattern>
                                 </relocation>
                             </relocations>
                             <filters>
@@ -79,7 +79,7 @@
                 </executions>
             </plugin>
         </plugins>
-        <finalName>AntiCheatReloaded</finalName>
+        <finalName>Guardian</finalName>
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>

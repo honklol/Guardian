@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +27,7 @@ import com.honklol.guardian.event.EventListener;
 import org.bukkit.entity.Player;
 
 import com.comphenix.protocol.events.PacketEvent;
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckResult;
 import com.honklol.guardian.check.CheckType;
 import com.honklol.guardian.config.providers.Checks;
@@ -44,14 +45,14 @@ public final class NoSlowCheck {
 			return;
 		}
 		
-		if (!AntiCheatReloaded.getManager().getCheckManager().willCheck(player, CheckType.NOSLOW)) {
+		if (!Guardian.getManager().getCheckManager().willCheck(player, CheckType.NOSLOW)) {
 			return;
 		}
 		
 		final UUID uuid = player.getUniqueId();
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(uuid);
+		final User user = Guardian.getManager().getUserManager().getUser(uuid);
 		final MovementManager movementManager = user.getMovementManager();
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 		final long time = System.currentTimeMillis();
 		final long lastRelease = LAST_RELEASE.getOrDefault(uuid, 0L);
 		LAST_RELEASE.put(uuid, time);
@@ -76,7 +77,7 @@ public final class NoSlowCheck {
 	private static void flag(final Player player, final PacketEvent event, final String message) {
 		event.setCancelled(true);
 		// We are currently not in the main server thread, so switch
-		AntiCheatReloaded.sendToMainThread(new Runnable() {
+		Guardian.sendToMainThread(new Runnable() {
 			@Override
 			public void run() {
 				EventListener.log(new CheckResult(CheckResult.Result.FAILED, message).getMessage(), player,

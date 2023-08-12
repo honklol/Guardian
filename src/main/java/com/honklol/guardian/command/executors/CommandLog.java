@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,13 +28,13 @@ import com.honklol.guardian.util.Permission;
 
 public class CommandLog extends CommandBase {
 
-    private static final String NAME = "AntiCheatReloaded Logging";
+    private static final String NAME = "Guardian Logging";
     private static final String COMMAND = "log";
     private static final String USAGE = "anticheat log [file/console] [on/off]";
     private static final Permission PERMISSION = Permission.SYSTEM_LOG;
     private static final String[] HELP = {
-            GRAY + "Use: " + AQUA + "/anticheat log console on" + GRAY + " to enable console logging",
-            GRAY + "Use: " + AQUA + "/anticheat log file off" + GRAY + " to disable file logging",
+            GRAY + "Use: " + AQUA + "/guardian log console on" + GRAY + " to enable console logging",
+            GRAY + "Use: " + AQUA + "/guardian log file off" + GRAY + " to disable file logging",
     };
 
     public CommandLog() {

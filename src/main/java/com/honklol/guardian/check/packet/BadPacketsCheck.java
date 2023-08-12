@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +25,7 @@ import org.bukkit.entity.Player;
 
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.Backend;
 import com.honklol.guardian.check.CheckResult;
 import com.honklol.guardian.check.CheckType;
@@ -41,14 +42,14 @@ public final class BadPacketsCheck {
 			return;
 		}
 		
-		final Backend backend = AntiCheatReloaded.getManager().getBackend();
+		final Backend backend = Guardian.getManager().getBackend();
 		// Confirm if we should even check for BadPackets
-		if (!AntiCheatReloaded.getManager().getCheckManager().willCheck(player, CheckType.BADPACKETS)
+		if (!Guardian.getManager().getCheckManager().willCheck(player, CheckType.BADPACKETS)
 				|| backend.isMovingExempt(player) || player.isDead()) {
 			return;
 		}
 
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(player.getUniqueId());
+		final User user = Guardian.getManager().getUserManager().getUser(player.getUniqueId());
 		final PacketContainer packet = event.getPacket();
 		final float pitch = packet.getFloat().read(1);
 		// Check for derp
@@ -57,9 +58,9 @@ public final class BadPacketsCheck {
 			return;
 		}
 
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
-		final double tps = AntiCheatReloaded.getPlugin().getTPS();
-		final MovementManager movementManager = AntiCheatReloaded.getManager().getUserManager()
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
+		final double tps = Guardian.getPlugin().getTPS();
+		final MovementManager movementManager = Guardian.getManager().getUserManager()
 				.getUser(player.getUniqueId()).getMovementManager();
 		if (user.isLagging() || tps < checksConfig.getDouble(CheckType.BADPACKETS, "minimumTps")
 				|| (System.currentTimeMillis() - movementManager.lastTeleport <= checksConfig
@@ -97,7 +98,7 @@ public final class BadPacketsCheck {
 	private static void flag(final Player player, final PacketEvent event, final String message, final Location setback) {
 		event.setCancelled(true);
 		// We are currently not in the main server thread, so switch
-		AntiCheatReloaded.sendToMainThread(() -> {
+		Guardian.sendToMainThread(() -> {
 			EventListener.log(new CheckResult(CheckResult.Result.FAILED, message).getMessage(), player,
 					CheckType.BADPACKETS, null);
 			player.teleport(setback != null ? setback : player.getLocation());

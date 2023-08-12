@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,19 +23,19 @@ package com.honklol.guardian.command.executors;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.command.CommandBase;
 import com.honklol.guardian.util.Permission;
 import com.honklol.guardian.util.UpdateManager;
 
 public class CommandVersion extends CommandBase {
 
-	private static final String NAME = "AntiCheatReloaded Version";
+	private static final String NAME = "Guardian Version";
 	private static final String COMMAND = "version";
 	private static final String USAGE = "anticheat version";
 	private static final Permission PERMISSION = Permission.SYSTEM_VERSION;
 	private static final String[] HELP = {
-			GRAY + "Use: " + AQUA + "/anticheat version" + GRAY + " to get update information", };
+			GRAY + "Use: " + AQUA + "/guardian version" + GRAY + " to get update information", };
 
 	public CommandVersion() {
 		super(NAME, COMMAND, USAGE, HELP, PERMISSION);
@@ -42,7 +43,7 @@ public class CommandVersion extends CommandBase {
 
 	@Override
 	protected void execute(CommandSender cs, String[] args) {
-		UpdateManager updateManager = AntiCheatReloaded.getUpdateManager();
+		UpdateManager updateManager = Guardian.getUpdateManager();
 		String status = RED + "behind";
 		if (updateManager.isLatest()) {
 			if (updateManager.isAhead()) {
@@ -51,8 +52,8 @@ public class CommandVersion extends CommandBase {
 				status = GOLD + "up-to-date";
 			}
 		}
-		cs.sendMessage(GOLD + "" + ChatColor.BOLD + "ACR " + GRAY + "You are running version " + GOLD
-				+ updateManager.getCurrentVersion() + GRAY + ". The latest version is " + GOLD
+		cs.sendMessage(RED + "" + ChatColor.BOLD + "Guardian " + GRAY + "You are running version " + RED
+				+ updateManager.getCurrentVersion() + GRAY + ". The latest version is " + RED
 				+ updateManager.getLatestVersion() + GRAY + ". This means you are " + status + GRAY + ".");
 	}
 }

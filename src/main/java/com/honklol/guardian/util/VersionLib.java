@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -60,7 +61,7 @@ public class VersionLib {
 
 	public static boolean isFlying(final Player player) {
 		return player.isFlying() || player.getGameMode() == GameMode.SPECTATOR || player.isGliding() || player.hasPotionEffect(PotionEffectType.LEVITATION)
-				|| AntiCheatReloaded.getManager().getBackend().justLevitated(player);
+				|| Guardian.getManager().getBackend().justLevitated(player);
 	}
 
 	public static boolean isSlowFalling(final Player player) {
@@ -144,7 +145,7 @@ public class VersionLib {
 	}
 
 	static {
-		SUPPORTED_VERSIONS = Arrays.asList(new String[] { "v1_18", "v1_17", "v1_16", "v1_15", "v1_14", "v1_13", "v1_12" });
+		SUPPORTED_VERSIONS = Arrays.asList(new String[] { "v1_20_R1", "v1_18", "v1_17", "v1_16", "v1_15", "v1_14", "v1_13", "v1_12" });
 		CURRENT_VERSION = MinecraftVersion.getCurrentVersion();
 	}
 }

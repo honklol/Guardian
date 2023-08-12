@@ -1,7 +1,7 @@
-name: AntiCheatReloaded
-author: Rammelkast
-description: AntiCheatReloaded helps easily identify and block malicious players on your server.
-main: com.honklol.guardian.AntiCheatReloaded
+name: Guardian
+author: honklol
+description: Guardian helps easily identify and block malicious players on your server.
+main: com.honklol.guardian.Guardian
 api-version: 1.13
 depend: [ProtocolLib]
 softdepend: [Floodgate, floodgate]
@@ -9,9 +9,9 @@ startup: postworld
 version: ${project.build.version}
 commands:
   anticheat:
-    description: Control and view info about AntiCheatReloaded
-    usage: /anticheat help
-    aliases: acr
+    description: Control and view info about Guardian
+    usage: /guardian help
+    aliases: [gac, guardian]
 permissions:
   anticheat.system.notice:
     description: See broadcasts when a player is kicked or banned for hacking

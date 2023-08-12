@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +22,7 @@ package com.honklol.guardian.check.movement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.Backend;
 import com.honklol.guardian.check.CheckResult;
 import com.honklol.guardian.check.CheckType;
@@ -40,15 +41,15 @@ public final class AimbotCheck {
 	 * TODO we need to check yaw deltas
 	 */
 	public static CheckResult runCheck(final Player player, final EntityDamageByEntityEvent event) {
-		final Backend backend = AntiCheatReloaded.getManager().getBackend();
+		final Backend backend = Guardian.getManager().getBackend();
 		if (backend.isMovingExempt(player)) {
 			return PASS;
 		}
 		
-		final User user = AntiCheatReloaded.getManager().getUserManager()
+		final User user = Guardian.getManager().getUserManager()
 				.getUser(player.getUniqueId());
 		final MovementManager movementManager = user.getMovementManager();
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 		final float deltaPitch = movementManager.deltaPitch;
 		final float pitchAcceleration = Math.abs(deltaPitch - movementManager.lastDeltaPitch);
 

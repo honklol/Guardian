@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -60,7 +61,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.Vector;
 
 import com.cryptomorin.xseries.XMaterial;
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckResult;
 import com.honklol.guardian.check.CheckType;
 import com.honklol.guardian.check.combat.VelocityCheck;
@@ -82,7 +83,7 @@ import com.honklol.guardian.util.VersionLib;
 
 public final class PlayerListener extends EventListener {
 
-	private static final AntiCheatManager MANAGER = AntiCheatReloaded.getManager();
+	private static final AntiCheatManager MANAGER = Guardian.getManager();
 
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
@@ -178,7 +179,7 @@ public final class PlayerListener extends EventListener {
 		final boolean debugMode = MANAGER.getConfiguration().getConfig().debugMode.getValue();
 		user.getVelocityTracker().registerVelocity(velocity);
 		if (debugMode) {
-			player.sendMessage(AntiCheatReloaded.PREFIX + "Registered velocity [" + velocity.toString() + "]");
+			player.sendMessage(Guardian.PREFIX + "Registered velocity [" + velocity.toString() + "]");
 		}
 
 		// Part of Velocity check
@@ -205,7 +206,7 @@ public final class PlayerListener extends EventListener {
 					player.sendMessage(ChatColor.translateAlternateColorCodes('&', result.getMessage()));
 				}
 				getBackend().processChatSpammer(player);
-				AntiCheatReloaded.sendToMainThread(new Runnable() {
+				Guardian.sendToMainThread(new Runnable() {
 					@Override
 					public void run() {
 						log(null, player, CheckType.CHAT_SPAM, result.getSubCheck());
@@ -219,7 +220,7 @@ public final class PlayerListener extends EventListener {
 			if (result.failed()) {
 				event.setCancelled(true);
 				player.sendMessage(ChatColor.translateAlternateColorCodes('&', result.getMessage()));
-				AntiCheatReloaded.sendToMainThread(new Runnable() {
+				Guardian.sendToMainThread(new Runnable() {
 					@Override
 					public void run() {
 						log(null, player, CheckType.CHAT_UNICODE, result.getSubCheck());
@@ -242,7 +243,7 @@ public final class PlayerListener extends EventListener {
 	public void onPlayerQuit(final PlayerQuitEvent event) {
 		final Player player = event.getPlayer();
 		try {
-			final User user = AntiCheatReloaded.getExecutor().submit(new Callable<User>() {
+			final User user = Guardian.getExecutor().submit(new Callable<User>() {
 				@Override
 				public User call() throws Exception {
 					getBackend().cleanup(player);
@@ -253,7 +254,7 @@ public final class PlayerListener extends EventListener {
 			}).get();
 			getUserManager().removeUser(user);
 		} catch (final InterruptedException | ExecutionException exception) {
-			AntiCheatReloaded.getPlugin().getLogger().log(Level.SEVERE, "Failed to destroy user object async",
+			Guardian.getPlugin().getLogger().log(Level.SEVERE, "Failed to destroy user object async",
 					exception);
 			return;
 		}
@@ -364,7 +365,7 @@ public final class PlayerListener extends EventListener {
 		getBackend().logJoin(player);
 
 		try {
-			final User user = AntiCheatReloaded.getExecutor().submit(new Callable<User>() {
+			final User user = Guardian.getExecutor().submit(new Callable<User>() {
 				@Override
 				public User call() throws Exception {
 					final User user = new User(player.getUniqueId());
@@ -375,17 +376,17 @@ public final class PlayerListener extends EventListener {
 			}).get();
 			getUserManager().addUser(user);
 		} catch (final InterruptedException | ExecutionException exception) {
-			AntiCheatReloaded.getPlugin().getLogger().log(Level.SEVERE, "Failed to create user object async",
+			Guardian.getPlugin().getLogger().log(Level.SEVERE, "Failed to create user object async",
 					exception);
 			return;
 		}
 
 		MANAGER.addEvent(event.getEventName(), event.getHandlers().getRegisteredListeners());
 
-		if (player.hasPermission("anticheat.admin") && !AntiCheatReloaded.getUpdateManager().isLatest()) {
-			player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "ACR " + ChatColor.GRAY
-					+ "Your version of AntiCheatReloaded is outdated! You can download "
-					+ AntiCheatReloaded.getUpdateManager().getLatestVersion()
+		if (player.hasPermission("anticheat.admin") && !Guardian.getUpdateManager().isLatest()) {
+			player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Guardian " + ChatColor.GRAY
+					+ "Your version of Guardian is outdated! You can download "
+					+ Guardian.getUpdateManager().getLatestVersion()
 					+ " from the Spigot forums or DevBukkit.");
 		}
 	}

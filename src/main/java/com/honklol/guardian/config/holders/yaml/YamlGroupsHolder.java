@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +22,7 @@ package com.honklol.guardian.config.holders.yaml;
 
 import java.util.*;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.config.Configuration;
 import com.honklol.guardian.config.ConfigurationFile;
 import com.honklol.guardian.config.providers.Groups;
@@ -35,7 +36,7 @@ public class YamlGroupsHolder extends ConfigurationFile implements Groups {
 
     private int highestLevel;
 
-    public YamlGroupsHolder(AntiCheatReloaded plugin, Configuration config) {
+    public YamlGroupsHolder(Guardian plugin, Configuration config) {
         super(plugin, config, FILENAME);
     }
 

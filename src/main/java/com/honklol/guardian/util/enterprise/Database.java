@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +20,7 @@
 
 package com.honklol.guardian.util.enterprise;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckType;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitTask;
@@ -138,7 +139,7 @@ public class Database {
             connection.setAutoCommit(false);
 
             if (logInterval != 0) {
-                eventTask = Bukkit.getScheduler().runTaskTimerAsynchronously(AntiCheatReloaded.getPlugin(), new Runnable() {
+                eventTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Guardian.getPlugin(), new Runnable() {
                     @Override
                     public void run() {
                         flushEvents();
@@ -147,7 +148,7 @@ public class Database {
             }
 
             if(syncLevels && syncInterval != 0) {
-                syncTask = Bukkit.getScheduler().runTaskTimerAsynchronously(AntiCheatReloaded.getPlugin(), new Runnable() {
+                syncTask = Bukkit.getScheduler().runTaskTimerAsynchronously(Guardian.getPlugin(), new Runnable() {
                     @Override
                     public void run() {
                         syncUsers();
@@ -155,7 +156,7 @@ public class Database {
                 }, syncInterval * 20, syncInterval * 20);
             }
 
-            AntiCheatReloaded.getPlugin().verboseLog("Connected to the database.");
+            Guardian.getPlugin().verboseLog("Connected to the database.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -204,7 +205,7 @@ public class Database {
 
     public void cleanEvents() {
         if (logLife != 0) {
-            Bukkit.getScheduler().runTaskAsynchronously(AntiCheatReloaded.getPlugin(), new Runnable() {
+            Bukkit.getScheduler().runTaskAsynchronously(Guardian.getPlugin(), new Runnable() {
                 @Override
                 public void run() {
                     try {
@@ -214,7 +215,7 @@ public class Database {
                         statement.executeUpdate();
 
                         connection.commit();
-                        AntiCheatReloaded.getPlugin().verboseLog("Cleaned " + statement.getUpdateCount() + " old events from the database");
+                        Guardian.getPlugin().verboseLog("Cleaned " + statement.getUpdateCount() + " old events from the database");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -224,8 +225,8 @@ public class Database {
     }
 
     private void syncUsers() {
-        for (User user : AntiCheatReloaded.getManager().getUserManager().getUsers()) {
-            AntiCheatReloaded.getManager().getConfiguration().getLevels().updateLevelToUser(user);
+        for (User user : Guardian.getManager().getUserManager().getUsers()) {
+            Guardian.getManager().getConfiguration().getLevels().updateLevelToUser(user);
         }
     }
 }

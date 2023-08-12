@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +23,7 @@ package com.honklol.guardian.command.executors;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckType;
 import com.honklol.guardian.command.CommandBase;
 import com.honklol.guardian.manage.CheckManager;
@@ -30,16 +31,16 @@ import com.honklol.guardian.util.Permission;
 
 public class CommandChecks extends CommandBase {
 
-	private static final String NAME = "AntiCheatReloaded Checks Management";
+	private static final String NAME = "Guardian Checks Management";
 	private static final String COMMAND = "checks";
 	private static final String USAGE = "anticheat checks";
 	private static final Permission PERMISSION = Permission.SYSTEM_CHECK;
 	private static final String[] HELP = new String[2];
 
 	static {
-		HELP[0] = GRAY + "Use: " + AQUA + "/anticheat checks" + GRAY + " for a list of checks";
+		HELP[0] = GRAY + "Use: " + AQUA + "/guardian checks" + GRAY + " for a list of checks";
 		StringBuilder builder = new StringBuilder();
-		CheckManager checkManager = AntiCheatReloaded.getManager().getCheckManager();
+		CheckManager checkManager = Guardian.getManager().getCheckManager();
 		builder.append(GRAY + "Checks: ");
 		for (int i = 0; i < CheckType.values().length; i++) {
 			CheckType type = CheckType.values()[i];

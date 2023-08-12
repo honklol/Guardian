@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +19,7 @@
  */
 package com.honklol.guardian.util;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -149,7 +150,7 @@ public final class MovementManager {
 				if (!VersionLib.isLevitationEffect(effect)) {
 					continue;
 				}
-				AntiCheatReloaded.getManager().getBackend().logLevitating(player, 1);
+				Guardian.getManager().getBackend().logLevitating(player, 1);
 			}
 		}
 
@@ -265,7 +266,7 @@ public final class MovementManager {
 
 		this.lastUpdate = System.currentTimeMillis();
 		
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(player.getUniqueId());
+		final User user = Guardian.getManager().getUserManager().getUser(player.getUniqueId());
 		// Tick velocity tracker
 		user.getVelocityTracker().tick();
 		// Update "good location"

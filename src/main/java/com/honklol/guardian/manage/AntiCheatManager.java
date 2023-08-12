@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +26,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.plugin.RegisteredListener;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.Backend;
 import com.honklol.guardian.config.Configuration;
 
@@ -34,7 +35,7 @@ import com.honklol.guardian.config.Configuration;
  */
 public final class AntiCheatManager {
 	
-    private static AntiCheatReloaded plugin;
+    private static Guardian plugin;
     private static Configuration configuration;
     private static UserManager userManager;
     private static CheckManager checkManager;
@@ -43,7 +44,7 @@ public final class AntiCheatManager {
     private static Map<String, RegisteredListener[]> eventchains = new ConcurrentHashMap<String, RegisteredListener[]>();
     private static Map<String, Long> eventcache = new ConcurrentHashMap<String, Long>();
 
-    public AntiCheatManager(final AntiCheatReloaded instance, final Logger logger) {
+    public AntiCheatManager(final Guardian instance, final Logger logger) {
         plugin = instance;
         configuration = new Configuration(plugin, this);
         loggingManager = new LoggingManager(plugin, logger, configuration);
@@ -104,7 +105,7 @@ public final class AntiCheatManager {
         return gen;
     }
 
-    public AntiCheatReloaded getPlugin() {
+    public Guardian getPlugin() {
         return plugin;
     }
 

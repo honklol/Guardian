@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +27,7 @@ import org.bukkit.GameMode;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.Backend;
 import com.honklol.guardian.check.CheckResult;
 import com.honklol.guardian.check.CheckType;
@@ -42,8 +43,8 @@ public final class NoFallCheck {
 	
 	public static CheckResult runCheck(final Player player, final double motionY) {
 		final UUID uuid = player.getUniqueId();
-		final Backend backend = AntiCheatReloaded.getManager().getBackend();
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Backend backend = Guardian.getManager().getBackend();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 		if (player.getGameMode() != GameMode.CREATIVE && !player.isInsideVehicle() && !player.isSleeping()
 				&& !backend.isMovingExempt(player) && !backend.justPlaced(player) && !Utilities.isNearWater(player)
 				&& !Utilities.isInWeb(player) && !player.getLocation().getBlock().getType().name().endsWith("TRAPDOOR")

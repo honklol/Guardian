@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +20,7 @@
 
 package com.honklol.guardian.config.files;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.util.enterprise.Database;
 import com.honklol.guardian.config.Configuration;
 import com.honklol.guardian.config.ConfigurationFile;
@@ -44,7 +45,7 @@ public class Enterprise extends ConfigurationFile {
 
     public Database database;
 
-    public Enterprise(AntiCheatReloaded plugin, Configuration config) {
+    public Enterprise(Guardian plugin, Configuration config) {
         super(plugin, config, FILENAME);
     }
 

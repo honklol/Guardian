@@ -1,35 +1,35 @@
-# AntiCheatReloaded language file
+# Guardian language file
 # The alert message when a player enters a higher group
 ALERT:
-- '&6&lACR &8> &7%player% has just entered the %group% hack group.'
-- '&6&lACR &8> &7%player%''s last failed check was: %check%.'
-- '&6&lACR &8> &7Type ''/acr report %player%'' for more information.'
+  - '&c&lGuardian &8> &7%player% has just entered the %group% hack group.'
+  - '&c&lGuardian &8> &7%player%''s last failed check was: %check%.'
+  - '&c&lGuardian &8> &7Type ''/guardian report %player%'' for more information.'
 # The warning a player receives when reaching a certain level
 # Only sent when enabled in groups.yml
 WARNING:
-- '&6&lACR &8>&7 You have been flagged for using cheats.'
-- '&6&lACR &8>&7 If you continue to cheat, action will be taken.'
+  - '&c&lGuardian &8>&7 You have been flagged for using cheats.'
+  - '&c&lGuardian &8>&7 If you continue to cheat, action will be taken.'
 # Ban message
-BAN_REASON: '&6&lACR &8> &7Banned for unfair advantage'
+BAN_REASON: '&c&lGuardian &8> &7Banned for unfair advantage'
 # Message to broadcast when banned
 # Only sent when enabled in config.yml
-BAN_BROADCAST: '&6&lACR &8> &7%player% was banned for cheating'
+BAN_BROADCAST: '&c&lGuardian &8> &7%player% was banned for cheating'
 # Kick message
-KICK_REASON: '&6&lACR &8> &7Kicked for unfair advantage'
+KICK_REASON: '&c&lGuardian &8> &7Kicked for unfair advantage'
 # Message to broadcast when kicked
 # Only sent when enabled in config.yml
-KICK_BROADCAST: '&6&lACR &8> &7%player% was kicked for cheating'
+KICK_BROADCAST: '&c&lGuardian &8> &7%player% was kicked for cheating'
 # The warning message to send when a player is spamming
-SPAM_WARNING: '&6&lACR &8> &7Stop spamming the server or you will be kicked!'
+SPAM_WARNING: '&c&lGuardian &8> &7Stop spamming the server or you will be kicked!'
 # Kick reason when spamming
-SPAM_KICK_REASON: '&6&lACR &8> &7Kicked for spamming'
+SPAM_KICK_REASON: '&c&lGuardian &8> &7Kicked for spamming'
 # Message to broadcast when kicked for spamming
 # Only sent when enabled in config.yml
-SPAM_KICK_BROADCAST: '&6&lACR &8> &7%player% was kicked for spamming'
+SPAM_KICK_BROADCAST: '&c&lGuardian &8> &7%player% was kicked for spamming'
 # Ban reason when spamming
-SPAM_BAN_REASON: '&6&lACR &8> &7Banned for spamming'
+SPAM_BAN_REASON: '&c&lGuardian &8> &7Banned for spamming'
 # Message to broadcast when banned for spamming
 # Only sent when enabled in config.yml
 SPAM_BAN_BROADCAST: '&c%player% was banned for spamming'
 # The prefix for staff and debug alerts
-ALERT_PREFIX: "&6&lACR &8> &7"
+ALERT_PREFIX: "&c&lGuardian &8> &7"

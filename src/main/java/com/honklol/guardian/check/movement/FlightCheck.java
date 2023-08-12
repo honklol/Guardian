@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +28,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckResult;
 import com.honklol.guardian.check.CheckType;
 import com.honklol.guardian.config.providers.Checks;
@@ -50,18 +51,18 @@ public final class FlightCheck {
 	private static final double GRAVITY_FRICTION = 0.98f;
 
 	public static CheckResult runCheck(final Player player, final Distance distance) {
-		if (distance.getYDifference() >= AntiCheatReloaded.getManager().getBackend().getMagic().TELEPORT_MIN()
+		if (distance.getYDifference() >= Guardian.getManager().getBackend().getMagic().TELEPORT_MIN()
 				|| VersionLib.isFlying(player) || player.getVehicle() != null
-				|| AntiCheatReloaded.getManager().getBackend().isMovingExempt(player)) {
+				|| Guardian.getManager().getBackend().isMovingExempt(player)) {
 			// This was a teleport or user is flying/using elytra/in a vehicle, so we don't
 			// care about it.
 			return PASS;
 		}
 
-		final User user = AntiCheatReloaded.getManager().getUserManager().getUser(player.getUniqueId());
+		final User user = Guardian.getManager().getUserManager().getUser(player.getUniqueId());
 		final MovementManager movementManager = user.getMovementManager();
 		final VelocityTracker velocityTracker = user.getVelocityTracker();
-		final Checks checksConfig = AntiCheatReloaded.getManager().getConfiguration().getChecks();
+		final Checks checksConfig = Guardian.getManager().getConfiguration().getChecks();
 
 		if (movementManager.nearLiquidTicks > 0 || movementManager.halfMovement || Utilities.isNearClimbable(player)
 				|| movementManager.riptideTicks > 0) {
@@ -85,14 +86,14 @@ public final class FlightCheck {
 			int blockPlaceAccountingTime = (int) (checksConfig.getInteger(CheckType.FLIGHT, "airFlight",
 					"accountForBlockPlacement") + (0.25 * (user.getPing() > 1000 ? 1000 : user.getPing())));
 			// Config default account is 250ms
-			if (AntiCheatReloaded.getPlugin().getTPS() < 18.0) {
+			if (Guardian.getPlugin().getTPS() < 18.0) {
 				blockPlaceAccountingTime += checksConfig.getInteger(CheckType.FLIGHT, "airFlight",
 						"accountForTpsDrops");
 			}
 
-			final long lastPlacedBlock = AntiCheatReloaded.getManager().getBackend().placedBlock
+			final long lastPlacedBlock = Guardian.getManager().getBackend().placedBlock
 					.containsKey(player.getUniqueId())
-							? AntiCheatReloaded.getManager().getBackend().placedBlock.get(player.getUniqueId())
+							? Guardian.getManager().getBackend().placedBlock.get(player.getUniqueId())
 							: (blockPlaceAccountingTime + 1);
 			double maxMotionY = System.currentTimeMillis() - lastPlacedBlock > blockPlaceAccountingTime ? 0 : 0.42;
 			// Fixes snow false positive
@@ -198,14 +199,14 @@ public final class FlightCheck {
 			int blockPlaceAccountingTime = (int) (checksConfig.getInteger(CheckType.FLIGHT, "airFlight",
 					"accountForBlockPlacement") + (0.25 * (user.getPing() > 1000 ? 1000 : user.getPing())));
 			// Config default account is 250ms
-			if (AntiCheatReloaded.getPlugin().getTPS() < 18.0) {
+			if (Guardian.getPlugin().getTPS() < 18.0) {
 				blockPlaceAccountingTime += checksConfig.getInteger(CheckType.FLIGHT, "airFlight",
 						"accountForTpsDrops");
 			}
 
-			final long lastPlacedBlock = AntiCheatReloaded.getManager().getBackend().placedBlock
+			final long lastPlacedBlock = Guardian.getManager().getBackend().placedBlock
 					.containsKey(player.getUniqueId())
-							? AntiCheatReloaded.getManager().getBackend().placedBlock.get(player.getUniqueId())
+							? Guardian.getManager().getBackend().placedBlock.get(player.getUniqueId())
 							: (blockPlaceAccountingTime + 1);
 			final double maxMotionY = System.currentTimeMillis() - lastPlacedBlock > blockPlaceAccountingTime ? 0
 					: 0.42;

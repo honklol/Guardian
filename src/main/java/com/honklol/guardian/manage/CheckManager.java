@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,13 +31,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.geysermc.floodgate.api.FloodgateApi;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckType;
 import com.honklol.guardian.config.Configuration;
 import com.honklol.guardian.util.VersionLib;
 
 /**
- * The manager that AntiCheatReloaded will check with to see if it should watch
+ * The manager that Guardian will check with to see if it should watch
  * certain checks and certain players.
  */
 public final class CheckManager {
@@ -62,7 +63,7 @@ public final class CheckManager {
         }
         
         if (!checkIgnoreList.isEmpty()) {
-        	Bukkit.getConsoleSender().sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "ACR " + ChatColor.DARK_GRAY + "> " + ChatColor.GRAY
+        	Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Guardian " + ChatColor.DARK_GRAY + "> " + ChatColor.GRAY
 					+ checkIgnoreList.size() + " check(s) have been disabled");
         }
     }
@@ -137,7 +138,7 @@ public final class CheckManager {
      * @param type   The check
      */
     public boolean isExempt(final Player player, final CheckType type) {
-    	if (AntiCheatReloaded.isFloodgateEnabled()) {
+    	if (Guardian.isFloodgateEnabled()) {
     		if (FloodgateApi.getInstance().isFloodgatePlayer(player.getUniqueId())) {
     			return true;
     		}

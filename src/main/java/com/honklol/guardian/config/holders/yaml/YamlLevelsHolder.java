@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +23,7 @@ package com.honklol.guardian.config.holders.yaml;
 import java.util.List;
 import java.util.UUID;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.config.Configuration;
 import com.honklol.guardian.config.providers.Levels;
 import com.honklol.guardian.config.ConfigurationFile;
@@ -32,7 +33,7 @@ public class YamlLevelsHolder extends ConfigurationFile implements Levels {
 
     public static final String FILENAME = "data/levels.yml";
 
-    public YamlLevelsHolder(AntiCheatReloaded plugin, Configuration config) {
+    public YamlLevelsHolder(Guardian plugin, Configuration config) {
         super(plugin, config, FILENAME, false);
     }
 
@@ -48,7 +49,7 @@ public class YamlLevelsHolder extends ConfigurationFile implements Levels {
 
     private void saveLevelFromUser(User user, boolean remove) {
         saveLevel(user.getUUID(), user.getLevel());
-        if (remove) AntiCheatReloaded.getManager().getUserManager().removeUser(user);
+        if (remove) Guardian.getManager().getUserManager().removeUser(user);
     }
 
     @Override

@@ -1,13 +1,13 @@
-# AntiCheatReloaded configuration file
+# Guardian configuration file
 spam:
   chat:
-    # Should AntiCheatReloaded block players spamming messages in chat?
+    # Should Guardian block players spamming messages in chat?
     block-speed: true
     block-repetition: true
     # Valid actions = NONE,KICK,BAN,COMMAND[command]
     action-one: KICK
     action-two: BAN
-  # Should AntiCheatReloaded block players spamming commands in chat?
+  # Should Guardian block players spamming commands in chat?
   command:
     block-speed: true
     block-repetition: true
@@ -15,25 +15,25 @@ spam:
     action-one: KICK
     action-two: BAN
 system:
-  # Should AntiCheatReloaded log ALL failed checks to console?
+  # Should Guardian log ALL failed checks to console?
   log-to-console: false
-  # Should AntiCheatReloaded log to file?
+  # Should Guardian log to file?
   log-to-file: true
-  # Should AntiCheatReloaded display extra debug information when starting?
+  # Should Guardian display extra debug information when starting?
   verbose-startup: false
-  # If silent mode is on, players will not be stopped when they try to hack, and AntiCheatReloaded will do everything possible to keep them unaware of their rising hack level.
+  # If silent mode is on, players will not be stopped when they try to hack, and Guardian will do everything possible to keep them unaware of their rising hack level.
   # However, alerts will still be sent to console and to admins online, and events will still take place.
   silent-mode: false
   # Disable broadcasts about why a player was kicked
   disable-broadcast: false
   # Should ops be exempt from all checks?
   exempt-op: false
-  # Should AntiCheatReloaded track plugins in its own registered events?
+  # Should Guardian track plugins in its own registered events?
   event-chains: true
   # Should Enterprise options be enabled? Only set this to true if you're an advanced user.
   enterprise: false
-  # Running AntiCheatReloaded in debug mode will send alerts to the cheating players and enable debug logging
-  # Use this when locating and/or reporting false positives or when testing AntiCheatReloaded
+  # Running Guardian in debug mode will send alerts to the cheating players and enable debug logging
+  # Use this when locating and/or reporting false positives or when testing Guardian
   # Do NOT enable this in a production environment!
   debug-mode: false
   # To prevent spamming, staff and the console will only be notified every x violations

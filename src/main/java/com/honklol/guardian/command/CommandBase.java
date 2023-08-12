@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +26,7 @@ import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.config.Configuration;
 import com.honklol.guardian.manage.CheckManager;
 import com.honklol.guardian.manage.UserManager;
@@ -33,9 +34,9 @@ import com.honklol.guardian.util.Permission;
 
 public class CommandBase {
 
-    public static final Configuration CONFIG = AntiCheatReloaded.getManager().getConfiguration();
-    public static final UserManager USER_MANAGER = AntiCheatReloaded.getManager().getUserManager();
-    public static final CheckManager CHECK_MANAGER = AntiCheatReloaded.getManager().getCheckManager();
+    public static final Configuration CONFIG = Guardian.getManager().getConfiguration();
+    public static final UserManager USER_MANAGER = Guardian.getManager().getUserManager();
+    public static final CheckManager CHECK_MANAGER = Guardian.getManager().getCheckManager();
     public static final ChatColor RED = ChatColor.RED;
     public static final ChatColor YELLOW = ChatColor.YELLOW;
     public static final ChatColor GREEN = ChatColor.GREEN;
@@ -45,7 +46,7 @@ public class CommandBase {
     public static final ChatColor AQUA = ChatColor.AQUA;
     public static final Server SERVER = Bukkit.getServer();
     public static final String PERMISSIONS_ERROR = RED + "You don't have the permissions to use this command.";
-    public static final String MENU_END = GOLD + "-----------------------------------------------------";
+    public static final String MENU_END = RED + "-----------------------------------------------------";
 
     private final String name;
     private final String command;
@@ -66,9 +67,9 @@ public class CommandBase {
             execute(cs, args);
 		} else {
 			if (args == null) {
-				cs.sendMessage(GOLD + "" + ChatColor.BOLD + "ACR" + ChatColor.DARK_GRAY + " > "
-						+ ChatColor.GRAY + "Running " + GOLD + "AntiCheatReloaded " + GRAY + "version "
-						+ GOLD + AntiCheatReloaded.getVersion());
+				cs.sendMessage(RED + "" + ChatColor.BOLD + "Guardian" + ChatColor.DARK_GRAY + " > "
+						+ ChatColor.GRAY + "Running " + RED + "Guardian AntiCheat " + GRAY + "version "
+						+ RED + Guardian.getVersion());
 			} else {
 				cs.sendMessage(PERMISSIONS_ERROR + " (" + WHITE + permission.toString() + RED + ")");
 			}
@@ -80,9 +81,9 @@ public class CommandBase {
     }
 
     public void sendHelp(CommandSender cs) {
-        cs.sendMessage(GOLD + "" + ChatColor.BOLD + "AntiCheatReloaded" + ChatColor.DARK_GRAY + " > " + ChatColor.GRAY + "Help Menu");
-        cs.sendMessage(GOLD + "Usage: " + GRAY + (cs instanceof Player ? "/" : "") + getUsage());
-        cs.sendMessage(GOLD + "Permission: " + GRAY + getPermission().toString());
+        cs.sendMessage(RED + "" + ChatColor.BOLD + "Guardian" + ChatColor.DARK_GRAY + " > " + ChatColor.GRAY + "Help Menu");
+        cs.sendMessage(RED + "Usage: " + GRAY + (cs instanceof Player ? "/" : "") + getUsage());
+        cs.sendMessage(RED + "Permission: " + GRAY + getPermission().toString());
         for (String string : getHelp()) {
             cs.sendMessage(string);
         }

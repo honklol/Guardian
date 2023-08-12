@@ -1,4 +1,4 @@
-# AntiCheatReloaded configuration file
+# Guardian configuration file
 # Server-specific settings
 server:
   # An identifiable name for this server
@@ -16,7 +16,7 @@ database:
   # Password for the user
   password: ''
   # Prefix for the tables
-  prefix: 'acr_'
+  prefix: 'guardian_'
   # Database/Schema to use
   database: 'anticheat'
 # Logging settings

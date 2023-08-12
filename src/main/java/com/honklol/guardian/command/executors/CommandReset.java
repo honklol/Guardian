@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,19 +23,19 @@ package com.honklol.guardian.command.executors;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.command.CommandBase;
 import com.honklol.guardian.util.Permission;
 import com.honklol.guardian.util.User;
 
 public class CommandReset extends CommandBase {
 
-	private static final String NAME = "AntiCheatReloaded Resetting";
+	private static final String NAME = "Guardian Resetting";
 	private static final String COMMAND = "reset";
 	private static final String USAGE = "anticheat reset [user]";
 	private static final Permission PERMISSION = Permission.SYSTEM_RESET;
 	private static final String[] HELP = {
-			GRAY + "Use: " + AQUA + "/anticheat reset [user]" + GRAY + " to reset this user's hack level",
+			GRAY + "Use: " + AQUA + "/guardian reset [user]" + GRAY + " to reset this user's hack level",
 	};
 
 	public CommandReset() {
@@ -54,8 +55,8 @@ public class CommandReset extends CommandBase {
 			if (user != null) {
 				user.resetLevel();
 				user.clearMessages();
-				AntiCheatReloaded.getManager().getBackend().resetChatLevel(user);
-				cs.sendMessage(GOLD + args[0] + GRAY + " has been reset.");
+				Guardian.getManager().getBackend().resetChatLevel(user);
+				cs.sendMessage(RED + args[0] + GRAY + " has been reset.");
 			} else {
 				cs.sendMessage(RED + "Player: " +args[0] + " not found.");
 			}

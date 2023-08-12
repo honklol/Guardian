@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +20,7 @@
 
 package com.honklol.guardian.util.rule;
 
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckType;
 import org.bukkit.GameMode;
 
@@ -177,7 +178,7 @@ public class Rule {
         if (variable.equals("player_level") && Utilities.isInt(value)) {
             user.setLevel(Integer.parseInt(value));
         } else if (variable.equals("player_group") && Utilities.isInt(value)) {
-            for (Group group : AntiCheatReloaded.getManager().getConfiguration().getGroups().getGroups()) {
+            for (Group group : Guardian.getManager().getConfiguration().getGroups().getGroups()) {
                 if (group.getName().equalsIgnoreCase(value)) {
                     user.setLevel(group.getLevel());
                 }
@@ -198,7 +199,7 @@ public class Rule {
             text = text.split("\\.")[1];
             List<String> action = new ArrayList<String>();
             action.add(text);
-            AntiCheatReloaded.getManager().getUserManager().execute(user, action, type);
+            Guardian.getManager().getUserManager().execute(user, action, type);
         }
     }
 

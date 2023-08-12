@@ -1,4 +1,4 @@
-# AntiCheatReloaded checks configuration file
+# Guardian checks configuration file
 # Checks that have multiple modules need to be disabled on a per-module basis
 # If you have a false positive and can't determine what subcheck it's from,
 # enable debug-mode in config.yml and compare the results against the commented values

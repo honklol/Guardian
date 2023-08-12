@@ -1,7 +1,8 @@
 /*
- * AntiCheatReloaded for Bukkit and Spigot.
+ * Guardian for Bukkit and Spigot.
  * Copyright (c) 2012-2015 AntiCheat Team
  * Copyright (c) 2016-2022 Rammelkast
+ * Copyright (c) 2022-2023 honklol
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +28,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
 import com.cryptomorin.xseries.XMaterial;
-import com.honklol.guardian.AntiCheatReloaded;
+import com.honklol.guardian.Guardian;
 import com.honklol.guardian.check.CheckResult;
 import com.honklol.guardian.util.Distance;
 import com.honklol.guardian.util.MinecraftVersion;
@@ -45,8 +46,8 @@ public final class ElytraCheck {
 		}
 		
 		final UUID uuid = player.getUniqueId();
-		if (distance.getYDifference() > AntiCheatReloaded.getManager().getBackend().getMagic().TELEPORT_MIN()
-				|| System.currentTimeMillis() - AntiCheatReloaded.getManager().getUserManager().getUser(uuid)
+		if (distance.getYDifference() > Guardian.getManager().getBackend().getMagic().TELEPORT_MIN()
+				|| System.currentTimeMillis() - Guardian.getManager().getUserManager().getUser(uuid)
 						.getMovementManager().lastTeleport <= 500) {
 			// This was a teleport, so skip check.
 			JUMP_Y_VALUE.remove(uuid);
@@ -84,7 +85,7 @@ public final class ElytraCheck {
 		if (lastY < distance.toY()) {
 			final double diff = distance.toY() - lastY;
 			if (diff > 0.7675) {
-				if (!AntiCheatReloaded.getManager().getBackend().silentMode()) {
+				if (!Guardian.getManager().getBackend().silentMode()) {
 					Location to = player.getLocation();
 					to.setY(to.getY() - diff);
 					player.teleport(to);
