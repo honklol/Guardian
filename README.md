@@ -1,4 +1,4 @@
-Guardian [![Latest Release](https://img.shields.io/github/v/release/Rammelkast/Guardian)](https://github.com/Rammelkast/Guardian/releases) [![Downloads](https://img.shields.io/github/downloads/Rammelkast/Guardian/total)](https://github.com/Rammelkast/Guardian/releases) [![Last Commit](https://img.shields.io/github/last-commit/Rammelkast/Guardian)](https://github.com/Rammelkast/Guardian/commits/master) [![Last Build](https://img.shields.io/jenkins/build?jobUrl=https%3A%2F%2Fci.rammelkast.com%2Fjob%2FGuardian)](https://ci.rammelkast.com/job/Guardian/lastBuild/)
+Guardian 
 =============
 Guardian helps server admins combat the use of hacked clients and spambots. It analyses the behavior of players and can prevent malicious gameplay. The plugin offers a lot of customizability and can be connected across multiple servers in case it is used in a server network context. Guardian is based on gravitylow's AntiCheat and has been around since 2012.
 
