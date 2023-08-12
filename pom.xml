@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.rammelkast.anticheatreloaded</groupId>
-    <artifactId>AntiCheatReloaded</artifactId>
-    <version>1.11.0-PRE</version>
-    <name>AntiCheatReloaded</name>
-    <url>https://www.spigotmc.org/resources/anticheatreloaded.23799/</url>
+    <groupId>com.honklol.guardian</groupId>
+    <artifactId>Guardian</artifactId>
+    <version>1.0.0</version>
+    <name>Guardian</name>
     <properties>
         <project.build.version>${project.version}</project.build.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,7 +14,7 @@
     <repositories>
         <repository>
             <id>dmulloy2-repo</id>
-            <url>https://repo.dmulloy2.net/nexus/repository/public/</url>
+            <url>https://repo.dmulloy2.net/repository/public/</url>
         </repository>
         <repository>
             <id>spigot-public-repo</id>
@@ -62,7 +61,7 @@
                                     <pattern>com.cryptomorin.xseries</pattern>
                                     <shadedPattern>com.rammelkast.anticheatreloaded.util</shadedPattern>
                                 </relocation>
-								<relocation>
+                                <relocation>
                                     <pattern>com.github.juliarn.npc</pattern>
                                     <shadedPattern>com.rammelkast.anticheatreloaded.util.npc</shadedPattern>
                                 </relocation>
@@ -99,19 +98,13 @@
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
             <artifactId>ProtocolLib</artifactId>
-            <version>4.8.0-SNAPSHOT</version>
+            <version>5.1.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.18.1-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
+            <version>1.20.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -131,6 +124,17 @@
             <artifactId>XSeries</artifactId>
             <version>8.5.0.1</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
         </dependency>
     </dependencies>
 </project>

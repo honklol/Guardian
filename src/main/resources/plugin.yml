@@ -1,7 +1,7 @@
 name: AntiCheatReloaded
 author: Rammelkast
 description: AntiCheatReloaded helps easily identify and block malicious players on your server.
-main: com.rammelkast.anticheatreloaded.AntiCheatReloaded
+main: com.honklol.guardian.AntiCheatReloaded
 api-version: 1.13
 depend: [ProtocolLib]
 softdepend: [Floodgate, floodgate]
