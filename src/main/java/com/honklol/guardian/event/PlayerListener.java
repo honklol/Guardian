@@ -387,7 +387,7 @@ public final class PlayerListener extends EventListener {
 			player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Guardian " + ChatColor.GRAY
 					+ "Your version of Guardian is outdated! You can download "
 					+ Guardian.getUpdateManager().getLatestVersion()
-					+ " from the Spigot forums or DevBukkit.");
+					+ " from the official GitHub repository (https://github.com/honklol/Guardian)");
 		}
 	}
 
