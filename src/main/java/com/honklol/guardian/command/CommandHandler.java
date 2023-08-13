@@ -23,18 +23,10 @@ package com.honklol.guardian.command;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.honklol.guardian.command.executors.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-
-import com.honklol.guardian.command.executors.CommandChecks;
-import com.honklol.guardian.command.executors.CommandHelp;
-import com.honklol.guardian.command.executors.CommandLog;
-import com.honklol.guardian.command.executors.CommandMute;
-import com.honklol.guardian.command.executors.CommandReload;
-import com.honklol.guardian.command.executors.CommandReport;
-import com.honklol.guardian.command.executors.CommandReset;
-import com.honklol.guardian.command.executors.CommandVersion;
 
 public class CommandHandler implements CommandExecutor {
 
