@@ -10,7 +10,7 @@ Guardian is a fork of [AntiCheatReloaded](https://github.com/Rammelkast/AntiChea
 - **Regular Updates**: Our development team is committed to staying ahead of new cheat methods and staying up-to-date with Minecraft updates, ensuring that Guardian remains effective over time.
 
 ## 📥 Installation
-1. Download the latest Guardian plugin JAR file from the [official website](https://gac.lol).
+1. Download the latest Guardian plugin JAR file from the [releases page](https://github.com/honklol/Guardian/releases/latest).
 2. Download ProtocolLib, a library for easy interaction with player packets - you can download it [here](https://www.spigotmc.org/resources/protocollib.1997/).
 3. Place the downloaded JAR file in the `plugins` directory of your Minecraft server.
 4. Restart the server to initialize Guardian.
@@ -36,7 +36,7 @@ If you encounter any issues or bugs while using Guardian, we encourage you to re
 To report an issue:
 1. Check the [Frequently Asked Questions](https://docs.gac.lol/faq) and [Troubleshooting](https://docs.gac.lol/troubleshooting) guides for any existing solutions related to your problem.
 2. If the issue persists, visit the [Issues](https://github.com/HonkJava/Guardian) page on our GitHub repository to submit a new issue. Please provide detailed information about the problem, including steps to reproduce it and any relevant logs or error messages. At the bare minimum, include the following:
-  - Installed Guardian version (run /guardian, the output includes the currently installed version)
+  - Installed Guardian version (run /guardian version)
   - Installed ProtocolLib version
   - Minecraft server software used (Spigot/Paper/Other) and it's version
   - Are you using any protocol hacks (ViaVersion, ViaBackwards, etc.)?
