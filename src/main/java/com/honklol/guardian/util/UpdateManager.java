@@ -25,15 +25,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.honklol.guardian.Guardian;
 
 public class UpdateManager {
-
-	public static final int RESOURCE_ID = 23799;
-	public static final String SPIGOT_VERSION_URL = "https://api.spigotmc.org/legacy/update.php?resource="
-			+ RESOURCE_ID;
-
+	public static final String GITHUB_URL = "https://api.github.com/repos/honklol/Guardian/releases";
 	private String latestVersion;
 	private boolean isLatest;
 	private boolean isAhead;
@@ -41,46 +39,58 @@ public class UpdateManager {
 	public UpdateManager() {
 		update();
 	}
-	
+
 	public void update() {
-		this.latestVersion = getOnlineData(SPIGOT_VERSION_URL);
+		this.latestVersion = getLatestNonPrereleaseVersion();
 		if (this.latestVersion == null) {
 			this.isLatest = true;
 			this.isAhead = false;
 			return;
 		}
-		
+
 		int splitCompare = 0;
 		try {
 			VersionSplit currentSplit = new VersionSplit(Guardian.getVersion());
 			VersionSplit newSplit = new VersionSplit(this.latestVersion);
 			splitCompare = currentSplit.compareTo(newSplit);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 		this.isLatest = splitCompare >= 0;
 		this.isAhead = splitCompare > 0;
 	}
 
-	private String getOnlineData(final String url) {
-		String data = null;
-		InputStream stream = null;
-		try {
-			stream = new URL(url).openStream();
-			final BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
-			final StringBuilder builder = new StringBuilder();
-			int readChar;
-			while ((readChar = reader.read()) != -1) {
-				builder.append((char) readChar);
-			}
-			data = builder.toString();
-			reader.close();
-		} catch (final IOException exception) {}
-		finally {
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (final IOException e) {}
+	private String getLatestNonPrereleaseVersion() {
+		String data = getOnlineData();
+		if (data != null) {
+			JSONArray releasesArray = new JSONArray(data);
+			for (int i = 0; i < releasesArray.length(); i++) {
+				JSONObject release = releasesArray.getJSONObject(i);
+				if (!release.getBoolean("prerelease")) {
+					String tagName = release.getString("tag_name");
+					if (tagName.startsWith("v")) {
+						return tagName.substring(1); // Remove "v" from the beginning
+					}
+				}
 			}
 		}
+		return null;
+	}
+
+	private String getOnlineData() {
+		String data = null;
+        try (InputStream stream = new URL(UpdateManager.GITHUB_URL).openStream()) {
+            final BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
+            final StringBuilder builder = new StringBuilder();
+            int readChar;
+            while ((readChar = reader.read()) != -1) {
+                builder.append((char) readChar);
+            }
+            data = builder.toString();
+            reader.close();
+        } catch (final IOException exception) {
+            throw new RuntimeException(exception);
+        }
 		return data;
 	}
 
