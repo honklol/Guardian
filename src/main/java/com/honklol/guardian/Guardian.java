@@ -161,7 +161,7 @@ public final class Guardian extends JavaPlugin {
 			@Override
 			public void run() {
 				try {
-					final Metrics metrics = new Metrics(Guardian.this, 202);
+					final Metrics metrics = new Metrics(Guardian.this, 19498);
 					metrics.addCustomChart(new SingleLineChart("cheaters_kicked", new Callable<Integer>() {
 						@Override
 						public Integer call() throws Exception {
