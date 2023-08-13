@@ -47,7 +47,7 @@ public final class PlayerPunishEvent extends Event implements Cancellable {
 	/**
 	 * Get the {@link User} who will be
 	 * punished
-	 * 
+	 *
 	 * @return a {@link User}
 	 */
 	public User getUser() {
@@ -57,7 +57,7 @@ public final class PlayerPunishEvent extends Event implements Cancellable {
 	/**
 	 * Get the list of actions the punishment will perform
 	 *
-	 * @return a a list of punishment strings
+	 * @return a list of punishment strings
 	 */
 	public List<String> getActions() {
 		return actions;

@@ -27,7 +27,7 @@ import com.honklol.guardian.check.CheckType;
 import com.honklol.guardian.util.User;
 
 /**
- * Fired when a player fails an Guardian check
+ * Fired when a player fails a Guardian check
  */
 public final class CheckFailEvent extends Event {
 
