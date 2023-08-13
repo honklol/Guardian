@@ -52,7 +52,8 @@ public class CommandVersion extends CommandBase {
 				status = GOLD + "up-to-date";
 			}
 		}
-		cs.sendMessage(RED + "" + ChatColor.BOLD + "Guardian " + GRAY + "You are running version " + RED
+		cs.sendMessage(RED + "" + ChatColor.BOLD + "Guardian " + ChatColor.DARK_GRAY + "> "
+		        + GRAY + "You are running version " + RED
 				+ updateManager.getCurrentVersion() + GRAY + ". The latest version is " + RED
 				+ updateManager.getLatestVersion() + GRAY + ". This means you are " + status + GRAY + ".");
 	}
