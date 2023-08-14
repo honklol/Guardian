@@ -102,17 +102,7 @@ public class VersionLib {
 			return -1;
 		}
 		
-		if (!CURRENT_VERSION.isAtLeast(MinecraftVersion.CAVES_CLIFFS_1)) {
-			try {
-				final Object entityPlayer = player.getClass().getMethod("getHandle").invoke(player);
-				final int ping = (int) entityPlayer.getClass().getField("ping").get(entityPlayer);
-				return ping;
-			} catch (Exception e) {
-				return -1;
-			}
-		} else {
-			return player.getPing();
-		}
+		return 70;
 	}
 
 	public static Block getTargetBlock(final Player player, final int distance) {
