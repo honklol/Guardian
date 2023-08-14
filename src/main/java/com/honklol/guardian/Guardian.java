@@ -28,6 +28,7 @@ import java.util.concurrent.Executors;
 
 import com.honklol.guardian.command.CommandHandler;
 import com.honklol.guardian.manage.AntiCheatManager;
+import com.honklol.guardian.util.PingTracker;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bstats.charts.SingleLineChart;
@@ -105,6 +106,8 @@ public final class Guardian extends JavaPlugin {
 		eventList.add(new EntityListener());
 		eventList.add(new VehicleListener());
 		eventList.add(new InventoryListener());
+		PingTracker pingTracker = new PingTracker(this);
+		PingTracker.setInstance(pingTracker);
 		// Order is important in some cases, don't screw with these unless
 		// needed, especially config
 		setupConfig();

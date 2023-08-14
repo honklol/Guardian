@@ -67,7 +67,7 @@ public final class User {
 		this.uuid = uuid;
 		this.name = getPlayer() != null && getPlayer().isOnline() ? getPlayer().getName() : "";
 		this.id = getPlayer() != null && getPlayer().isOnline() ? getPlayer().getEntityId() : -1;
-		this.ping = getPlayer() != null && getPlayer().isOnline() ? VersionLib.getPlayerPing(getPlayer()) : -1;
+		this.ping = getPlayer() != null && getPlayer().isOnline() ? PingTracker.getInstance().getPlayerPing(getPlayer()) : -1;
 		
 		this.movementManager = new MovementManager();
 		this.velocityTracker = new VelocityTracker(this.config.getMagic().VELOCITY_TIME());
@@ -404,7 +404,7 @@ public final class User {
 	public int getPing() {
 		final int ping = this.ping;
 		if (ping < 0) {
-			return VersionLib.getPlayerPing(getPlayer());
+			return PingTracker.getInstance().getPlayerPing(getPlayer());
 		}
 		return ping;
 	}
