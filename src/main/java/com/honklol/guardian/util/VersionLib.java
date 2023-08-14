@@ -96,15 +96,6 @@ public class VersionLib {
 		return player.getInventory().getItemInMainHand();
 	}
 
-	public static int getPlayerPing(final Player player) {
-		// May be called with offline (null) player
-		if (player == null) {
-			return -1;
-		}
-		
-		return 70;
-	}
-
 	public static Block getTargetBlock(final Player player, final int distance) {
 		if (!CURRENT_VERSION.isAtLeast(MinecraftVersion.AQUATIC_UPDATE)) {
 			return player.getTargetBlock((Set<Material>) null, distance);
