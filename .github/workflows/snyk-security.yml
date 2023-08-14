@@ -1,4 +1,4 @@
-name: Guardian Snyk Code Scanning
+name: Snyk
 on: push
 jobs:
   security:
