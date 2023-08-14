@@ -30,7 +30,7 @@ public class CommandReload extends CommandBase {
 
     private static final String NAME = "Guardian Reload";
     private static final String COMMAND = "reload";
-    private static final String USAGE = "anticheat reload";
+    private static final String USAGE = "guardian reload";
     private static final Permission PERMISSION = Permission.SYSTEM_RELOAD;
     private static final String[] HELP = {
             GRAY + "Use: " + AQUA + "/guardian reload" + GRAY + " to reload AntiCheat settings",

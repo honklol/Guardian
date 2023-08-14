@@ -33,7 +33,7 @@ public class CommandChecks extends CommandBase {
 
 	private static final String NAME = "Guardian Checks Management";
 	private static final String COMMAND = "checks";
-	private static final String USAGE = "anticheat checks";
+	private static final String USAGE = "guardian checks";
 	private static final Permission PERMISSION = Permission.SYSTEM_CHECK;
 	private static final String[] HELP = new String[2];
 

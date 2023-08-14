@@ -32,7 +32,7 @@ public class CommandReset extends CommandBase {
 
 	private static final String NAME = "Guardian Resetting";
 	private static final String COMMAND = "reset";
-	private static final String USAGE = "anticheat reset [user]";
+	private static final String USAGE = "guardian reset [user]";
 	private static final Permission PERMISSION = Permission.SYSTEM_RESET;
 	private static final String[] HELP = {
 			GRAY + "Use: " + AQUA + "/guardian reset [user]" + GRAY + " to reset this user's hack level",

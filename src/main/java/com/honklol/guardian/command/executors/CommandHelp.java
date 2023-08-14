@@ -29,7 +29,7 @@ public class CommandHelp extends CommandBase {
 
     private static final String NAME = "Guardian Help";
     private static final String COMMAND = "help";
-    private static final String USAGE = "anticheat help";
+    private static final String USAGE = "guardian help";
     private static final Permission PERMISSION = Permission.SYSTEM_HELP;
     private static final String[] HELP = {
     		RED + "/guardian " + GRAY + "help",

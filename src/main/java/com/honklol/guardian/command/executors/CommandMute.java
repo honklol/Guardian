@@ -33,7 +33,7 @@ public class CommandMute extends CommandBase {
 
 	private static final String NAME = "Guardian Mute";
 	private static final String COMMAND = "mute";
-	private static final String USAGE = "anticheat mute";
+	private static final String USAGE = "guardian mute";
 	private static final Permission PERMISSION = Permission.SYSTEM_MUTE;
 	private static final String[] HELP = {
 			GRAY + "Use: " + AQUA + "/guardian mute" + GRAY + " to mute all notifications", };

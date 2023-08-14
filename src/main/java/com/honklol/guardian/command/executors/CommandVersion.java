@@ -32,7 +32,7 @@ public class CommandVersion extends CommandBase {
 
 	private static final String NAME = "Guardian Version";
 	private static final String COMMAND = "version";
-	private static final String USAGE = "anticheat version";
+	private static final String USAGE = "guardian version";
 	private static final Permission PERMISSION = Permission.SYSTEM_VERSION;
 	private static final String[] HELP = {
 			GRAY + "Use: " + AQUA + "/guardian version" + GRAY + " to get update information", };

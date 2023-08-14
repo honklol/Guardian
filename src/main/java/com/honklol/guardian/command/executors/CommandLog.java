@@ -30,7 +30,7 @@ public class CommandLog extends CommandBase {
 
     private static final String NAME = "Guardian Logging";
     private static final String COMMAND = "log";
-    private static final String USAGE = "anticheat log [file/console] [on/off]";
+    private static final String USAGE = "guardian log [file/console] [on/off]";
     private static final Permission PERMISSION = Permission.SYSTEM_LOG;
     private static final String[] HELP = {
             GRAY + "Use: " + AQUA + "/guardian log console on" + GRAY + " to enable console logging",
