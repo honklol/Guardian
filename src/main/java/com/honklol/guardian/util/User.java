@@ -409,6 +409,10 @@ public final class User {
 		return ping;
 	}
 
+	public String getMethod() {
+		return PingTracker.getInstance().getCurrentMethod(getPlayer());
+	}
+
 	public int getLastPing() {
 		final int lastPing = this.lastPing;
 		if (lastPing < 0) {

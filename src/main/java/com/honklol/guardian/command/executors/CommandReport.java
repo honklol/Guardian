@@ -157,8 +157,9 @@ public class CommandReport extends CommandBase {
 					+ "]----------------------");
 			cs.sendMessage(GRAY + "Player: " + WHITE + name);
 			int ping = user.getPing();
+			String method = user.getMethod();
 			cs.sendMessage(GRAY + "Ping: " + ((ping == -1) ? (RED + "Offline")
-					: (WHITE + "" + ping + "ms "
+					: (WHITE + "" + ping + "ms " + method + " "
 							+ (user.isLagging() ? ChatColor.RED + "(lagging)" : ChatColor.GREEN + "(not lagging)"))));
 			cs.sendMessage(GRAY + "Group: " + groupString);
 			for (int x = 0; x < 6; x++) {
@@ -181,8 +182,9 @@ public class CommandReport extends CommandBase {
 				cs.sendMessage(RED + "----------------------[" + WHITE + "Page 1/1" + RED + "]----------------------");
 				cs.sendMessage(GRAY + "Player: " + WHITE + name);
 				int ping = user.getPing();
+				String method = user.getMethod();
 				cs.sendMessage(GRAY + "Ping: " + ((ping == -1) ? (RED + "Offline")
-						: (WHITE + "" + ping + "ms "
+						: (WHITE + "" + ping + "ms " + method + " "
 								+ (user.isLagging() ? ChatColor.RED + "(lagging)" : ChatColor.GREEN + "(not lagging)"))));
 				cs.sendMessage(GRAY + "Group: " + groupString);
 				cs.sendMessage(GRAY + "This user has not failed any checks.");

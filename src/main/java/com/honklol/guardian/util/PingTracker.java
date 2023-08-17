@@ -172,4 +172,22 @@ public class PingTracker {
         // No data available, return -1 as latency
         return -1;
     }
+
+    public String getCurrentMethod(Player player) {
+        Integer pingKeepalive = playerPingKeepalive.get(player.getUniqueId());
+        Integer pingPacket = playerPingPacket.get(player.getUniqueId());
+
+        // Prefer ping packet over keepalive
+        if (pingPacket != null) {
+            return "(ping)";
+        }
+
+        // Fallback to keepalive packet
+        if (pingKeepalive != null) {
+            return "(keepalive)";
+        }
+
+        // No data available, return -1 as latency
+        return "(unknown)";
+    }
 }
