@@ -24,10 +24,12 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.PacketAdapter;
+import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,8 +41,10 @@ import java.util.UUID;
 public class PingTracker {
     private static PingTracker instance;
     private final Plugin plugin;
-    private final Map<UUID, Integer> playerPings;
-    private final Map<UUID, Long> timings;
+    private final Map<UUID, Integer> playerPingKeepalive;
+    private final Map<UUID, Integer> playerPingPacket;
+    private final Map<UUID, Long> timingsKeepalive;
+    private final Map<UUID, Long> timingsPing;
 
     public static void setInstance(PingTracker pingTracker) {
         instance = pingTracker;
@@ -57,10 +61,46 @@ public class PingTracker {
      */
     public PingTracker(Plugin plugin) {
         this.plugin = plugin;
-        this.playerPings = new HashMap<>();
-        this.timings = new HashMap<>();
+        this.playerPingKeepalive = new HashMap<>();
+        this.playerPingPacket = new HashMap<>();
+        this.timingsKeepalive = new HashMap<>();
+        this.timingsPing = new HashMap<>();
 
         setupPingListeners();
+        startPingTask(1);
+    }
+
+    /**
+     * Sends a Ping packet to the specified player to measure latency.
+     *
+     * @param player the player to send the Ping packet to
+     */
+    public void sendPingPacket(Player player) {
+        ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
+        PacketContainer pingPacket = protocolManager.createPacket(PacketType.Play.Server.PING);
+
+        try {
+            protocolManager.sendServerPacket(player, pingPacket);
+            timingsPing.put(player.getUniqueId(), System.currentTimeMillis());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Starts a BukkitRunnable that sends Ping packets to all online players periodically.
+     *
+     * @param intervalInSeconds the interval in seconds between each Ping packet
+     */
+    public void startPingTask(int intervalInSeconds) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    sendPingPacket(player);
+                }
+            }
+        }.runTaskTimer(plugin, 0L, intervalInSeconds * 20L); // Convert seconds to ticks
     }
 
     /**
@@ -75,7 +115,7 @@ public class PingTracker {
             public void onPacketSending(PacketEvent event) {
                 Player player = event.getPlayer();
                 long serverSentTime = System.currentTimeMillis();
-                timings.put(player.getUniqueId(), serverSentTime);
+                timingsKeepalive.put(player.getUniqueId(), serverSentTime);
             }
         });
 
@@ -85,11 +125,25 @@ public class PingTracker {
             public void onPacketReceiving(PacketEvent event) {
                 Player player = event.getPlayer();
                 long clientReceivedTime = System.currentTimeMillis();
-                Long serverSentTime = timings.get(player.getUniqueId());
+                Long serverSentTime = timingsKeepalive.get(player.getUniqueId());
                 if (serverSentTime != null) {
                     int ping = (int) (clientReceivedTime - serverSentTime);
-                    playerPings.put(player.getUniqueId(), ping);
-                    timings.remove(player.getUniqueId());
+                    playerPingKeepalive.put(player.getUniqueId(), ping);
+                    timingsKeepalive.remove(player.getUniqueId());
+                }
+            }
+        });
+
+        // Listener for client's Pong packet
+        protocolManager.addPacketListener(new PacketAdapter(plugin, PacketType.Play.Client.PONG) {
+            @Override
+            public void onPacketReceiving(PacketEvent event) {
+                Player player = event.getPlayer();
+                Long serverSentTime = timingsPing.get(player.getUniqueId());
+                if (serverSentTime != null) {
+                    int ping = (int) (System.currentTimeMillis() - serverSentTime);
+                    playerPingPacket.put(player.getUniqueId(), ping);
+                    timingsPing.remove(player.getUniqueId());
                 }
             }
         });
@@ -99,9 +153,23 @@ public class PingTracker {
      * Gets the ping of a specific player.
      *
      * @param player the player whose ping is to be retrieved
-     * @return the player's calculated ping, or 50 if it's not available yet
+     * @return the player's calculated ping, or -1 if it's not available
      */
     public int getPlayerPing(Player player) {
-        return playerPings.getOrDefault(player.getUniqueId(), -1);
+        Integer pingKeepalive = playerPingKeepalive.get(player.getUniqueId());
+        Integer pingPacket = playerPingPacket.get(player.getUniqueId());
+
+        // Prefer ping packet over keepalive
+        if (pingPacket != null) {
+            return pingPacket;
+        }
+
+        // Fallback to keepalive packet
+        if (pingKeepalive != null) {
+            return pingKeepalive;
+        }
+
+        // No data available, return -1 as latency
+        return -1;
     }
 }
