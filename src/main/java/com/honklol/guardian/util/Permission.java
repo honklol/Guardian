@@ -32,7 +32,7 @@ public enum Permission {
 
 	/* System Nodes */
 	SYSTEM_LOG, SYSTEM_RESET, SYSTEM_HELP, SYSTEM_VERSION, SYSTEM_REPORT, SYSTEM_NOTICE, SYSTEM_CHECK, SYSTEM_RELOAD,
-	SYSTEM_MUTE;
+	SYSTEM_MUTE, SYSTEM_GUI;
 
 	private static final String PERMISSION_ALL = "anticheat.*";
 	private static final String PERMISSION_SPAM = "anticheat.check.spam";
