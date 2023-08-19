@@ -40,6 +40,7 @@ public class CommandHelp extends CommandBase {
             RED + "/guardian " + GRAY + "log " + WHITE + "[file/console] [on/off]",
             RED + "/guardian " + GRAY + "report " + WHITE + "[group/user]",
             RED + "/guardian " + GRAY + "reset " + WHITE + "[user]",
+            RED + "/guardian " + GRAY + "gui"
     };
 
     public CommandHelp() {

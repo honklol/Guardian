@@ -41,6 +41,7 @@ public class CommandHandler implements CommandExecutor {
         commands.add(new CommandMute());
         commands.add(new CommandReset());
         commands.add(new CommandVersion());
+        commands.add(new CommandGUI());
     }
 
     @Override
