@@ -5,7 +5,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import static com.honklol.guardian.extras.gui.DataManager.*;
+import static com.honklol.guardian.extras.gui.DataManager.createItem;
+import static com.honklol.guardian.extras.gui.DataManager.createLogToggleItem;
+import static com.honklol.guardian.extras.gui.DataManager.createLogStatusItem;
+import static com.honklol.guardian.extras.gui.DataManager.fillEmptySlotsWithPane;
 
 public class Logging {
     public static Inventory createGUI(Player player, boolean fileLoggingEnabled, boolean consoleLoggingEnabled) {
