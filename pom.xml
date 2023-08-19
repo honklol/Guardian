@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.honklol.guardian</groupId>
     <artifactId>Guardian</artifactId>
-    <version>1.0.4</version>
+    <version>1.1.0</version>
     <name>Guardian</name>
     <properties>
         <project.build.version>${project.version}</project.build.version>
