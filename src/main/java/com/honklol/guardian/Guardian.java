@@ -27,6 +27,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.honklol.guardian.command.CommandHandler;
+import com.honklol.guardian.event.*;
+import com.honklol.guardian.extras.gui.DataListener;
 import com.honklol.guardian.manage.AntiCheatManager;
 import com.honklol.guardian.util.PingTracker;
 import org.bstats.bukkit.Metrics;
@@ -42,12 +44,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import com.honklol.guardian.config.Configuration;
-import com.honklol.guardian.event.BlockListener;
-import com.honklol.guardian.event.EntityListener;
-import com.honklol.guardian.event.InventoryListener;
-import com.honklol.guardian.event.PacketListener;
-import com.honklol.guardian.event.PlayerListener;
-import com.honklol.guardian.event.VehicleListener;
 import com.honklol.guardian.util.UpdateManager;
 import com.honklol.guardian.util.User;
 import com.honklol.guardian.util.VersionLib;
@@ -76,6 +72,12 @@ public final class Guardian extends JavaPlugin {
 
 	private double tps = -1;
 
+	private static Guardian instance;
+
+	public static Guardian getInstance() {
+		return instance;
+	}
+
 	@Override
 	public void onLoad() {
 		plugin = this;
@@ -99,6 +101,7 @@ public final class Guardian extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+		instance = this;
 		manager = new AntiCheatManager(this, getLogger());
 
 		eventList.add(new PlayerListener());
@@ -106,6 +109,7 @@ public final class Guardian extends JavaPlugin {
 		eventList.add(new EntityListener());
 		eventList.add(new VehicleListener());
 		eventList.add(new InventoryListener());
+		eventList.add(new DataListener());
 		PingTracker pingTracker = new PingTracker(this);
 		PingTracker.setInstance(pingTracker);
 		// Order is important in some cases, don't screw with these unless
