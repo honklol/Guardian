@@ -43,7 +43,6 @@ public class CommandReload extends CommandBase {
     @Override
     protected void execute(CommandSender cs, String[] args) {
         CONFIG.load();
-        cs.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Guardian " + ChatColor.DARK_GRAY + "> "
-    			+ ChatColor.GRAY + "The configuration was reloaded");
+        cs.sendMessage(PREFIX + "The configuration was reloaded");
     }
 }

@@ -42,11 +42,14 @@ public class CommandBase {
     public static final ChatColor GREEN = ChatColor.GREEN;
     public static final ChatColor WHITE = ChatColor.WHITE;
     public static final ChatColor GRAY = ChatColor.GRAY;
+    public static final ChatColor DARK_GRAY = ChatColor.DARK_GRAY;
     public static final ChatColor GOLD = ChatColor.GOLD;
     public static final ChatColor AQUA = ChatColor.AQUA;
+    public static final ChatColor BOLD = ChatColor.BOLD;
     public static final Server SERVER = Bukkit.getServer();
     public static final String PERMISSIONS_ERROR = RED + "You don't have the permissions to use this command.";
     public static final String MENU_END = RED + "-----------------------------------------------------";
+    public static final String PREFIX = RED + "" + BOLD + "Guardian" + DARK_GRAY + " > " + GRAY;
 
     private final String name;
     private final String command;

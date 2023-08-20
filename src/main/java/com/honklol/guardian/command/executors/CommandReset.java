@@ -21,6 +21,7 @@
 package com.honklol.guardian.command.executors;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 import com.honklol.guardian.Guardian;
@@ -56,9 +57,9 @@ public class CommandReset extends CommandBase {
 				user.resetLevel();
 				user.clearMessages();
 				Guardian.getManager().getBackend().resetChatLevel(user);
-				cs.sendMessage(RED + args[0] + GRAY + " has been reset.");
+				cs.sendMessage(PREFIX + args[0] + " has been reset.");
 			} else {
-				cs.sendMessage(RED + "Player: " +args[0] + " not found.");
+				cs.sendMessage(PREFIX + "Player: " + args[0] + " not found.");
 			}
 		} else {
 			sendHelp(cs);

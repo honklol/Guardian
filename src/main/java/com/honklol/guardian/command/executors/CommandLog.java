@@ -69,10 +69,10 @@ public class CommandLog extends CommandBase {
 
             String strValue = (newValue ? " enabled" : " disabled");
             if (value.getValue() == newValue) {
-                cs.sendMessage(GREEN + name + " is already " + strValue + "!");
+                cs.sendMessage(PREFIX + name + " is already" + strValue + "!");
             } else {
                 value.setValue(newValue);
-                cs.sendMessage(GREEN + name + strValue + ".");
+                cs.sendMessage(PREFIX + name + strValue + ".");
                 CONFIG.getConfig().reload();
             }
         } else {
