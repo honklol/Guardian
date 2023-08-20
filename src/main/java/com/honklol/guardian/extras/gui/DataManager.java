@@ -1,6 +1,7 @@
 package com.honklol.guardian.extras.gui;
 
 import com.honklol.guardian.Guardian;
+import com.honklol.guardian.config.Configuration;
 import com.honklol.guardian.util.UpdateManager;
 import com.honklol.guardian.util.VersionLib;
 import lombok.Getter;
@@ -16,12 +17,11 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import static com.honklol.guardian.command.CommandBase.CONFIG;
-
 /**
  * A utility class for creating various GUI-related items and checking plugin & MC versions, plus logging statuses.
  */
 public class DataManager {
+    public static final Configuration CONFIG = Guardian.getManager().getConfiguration();
     public static final String PREFIX = ChatColor.RED + "" + ChatColor.BOLD + "Guardian" + ChatColor.BLACK + " > " + ChatColor.DARK_GRAY;
 
     @Getter
@@ -106,7 +106,7 @@ public class DataManager {
      * @param gui The GUI inventory to fill.
      */
     public static void fillEmptySlotsWithPane(Inventory gui) {
-        ItemStack filler = createItem(Material.GRAY_STAINED_GLASS_PANE, "");
+        ItemStack filler = createItem(Material.GRAY_STAINED_GLASS_PANE, "&8Placeholder");
 
         for (int i = 0; i < gui.getSize(); i++) {
             if (gui.getItem(i) == null) {
