@@ -1,18 +1,15 @@
 package com.honklol.guardian.extras.gui.generators;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import static com.honklol.guardian.extras.gui.DataManager.createItem;
-import static com.honklol.guardian.extras.gui.DataManager.createLogToggleItem;
-import static com.honklol.guardian.extras.gui.DataManager.createLogStatusItem;
-import static com.honklol.guardian.extras.gui.DataManager.fillEmptySlotsWithPane;
+
+import static com.honklol.guardian.extras.gui.DataManager.*;
 
 public class Logging {
     public static Inventory createGUI(Player player, boolean fileLoggingEnabled, boolean consoleLoggingEnabled) {
-        Inventory gui = Bukkit.createInventory(player, 27, ChatColor.BOLD + "Logging");
+        Inventory gui = Bukkit.createInventory(player, 27, PREFIX + "Logging");
 
         gui.setItem(10, createLogToggleItem(fileLoggingEnabled, "file"));
         gui.setItem(12, createLogToggleItem(consoleLoggingEnabled, "console"));

@@ -1,7 +1,6 @@
 package com.honklol.guardian.extras.gui.generators;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -9,7 +8,7 @@ import static com.honklol.guardian.extras.gui.DataManager.*;
 
 public class Primary {
     public static Inventory createGUI(Player player) {
-        Inventory gui = Bukkit.createInventory(player, 27, ChatColor.BOLD + "Guardian");
+        Inventory gui = Bukkit.createInventory(player, 27, PREFIX + "Main Page");
 
         gui.setItem(10, createItem(Material.COMMAND_BLOCK, "&f&lCommands", "&r&fExecute available commands interactively."));
         gui.setItem(11, createItem(Material.OAK_FENCE, "&f&lChecks", "&r&fModify anti-cheat check settings."));

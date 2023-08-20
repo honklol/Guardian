@@ -22,6 +22,8 @@ import static com.honklol.guardian.command.CommandBase.CONFIG;
  * A utility class for creating various GUI-related items and checking plugin & MC versions, plus logging statuses.
  */
 public class DataManager {
+    public static final String PREFIX = ChatColor.RED + "" + ChatColor.BOLD + "Guardian" + ChatColor.BLACK + " > " + ChatColor.DARK_GRAY;
+
     @Getter
     private enum LoggingType {
         FILE(Material.BOOK),

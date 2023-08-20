@@ -13,17 +13,16 @@ import org.bukkit.inventory.meta.SkullMeta;
 import com.honklol.guardian.util.User;
 import com.honklol.guardian.check.CheckType;
 
-import static com.honklol.guardian.extras.gui.DataManager.createItem;
-import static com.honklol.guardian.extras.gui.DataManager.fillEmptySlotsWithPane;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.honklol.guardian.extras.gui.DataManager.*;
+
 public class Players {
     public static Inventory createGUI(Player player) {
         int inventorySize = Math.min(54, (int) Math.ceil(Bukkit.getOnlinePlayers().size() / 9.0) * 9);
-        Inventory gui = Bukkit.createInventory(player, inventorySize, ChatColor.BOLD + "Players");
+        Inventory gui = Bukkit.createInventory(player, inventorySize, PREFIX + "Players");
         gui.setItem(inventorySize - 1, createItem(Material.BARRIER, "&f&lGo back", "&r&fReturn to the main page."));
 
         List<PlayerViolation> playerViolations = new ArrayList<>();

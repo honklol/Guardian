@@ -11,10 +11,11 @@ import com.honklol.guardian.check.CheckType;
 import com.honklol.guardian.Guardian;
 import static com.honklol.guardian.extras.gui.DataManager.createItem;
 import static com.honklol.guardian.extras.gui.DataManager.fillEmptySlotsWithPane;
+import static com.honklol.guardian.extras.gui.DataManager.PREFIX;
 
 public class Checks {
     public static Inventory createGUI(Player player) {
-        Inventory gui = Bukkit.createInventory(player, 36, ChatColor.BOLD + "Checks");
+        Inventory gui = Bukkit.createInventory(player, 36, PREFIX + "Checks");
 
         CheckManager checkManager = Guardian.getManager().getCheckManager();
         for (int i = 0; i < CheckType.values().length; i++) {
