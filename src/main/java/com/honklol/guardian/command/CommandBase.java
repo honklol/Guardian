@@ -70,9 +70,8 @@ public class CommandBase {
             execute(cs, args);
 		} else {
 			if (args == null) {
-				cs.sendMessage(RED + "" + ChatColor.BOLD + "Guardian" + ChatColor.DARK_GRAY + " > "
-						+ ChatColor.GRAY + "Running " + RED + "Guardian AntiCheat " + GRAY + "version "
-						+ RED + Guardian.getVersion());
+				cs.sendMessage(PREFIX + "Running " + RED + "Guardian Anti-Cheat " + GRAY + "version "
+						+ RED + String.format("%s" + GRAY + ".", Guardian.getVersion()));
 			} else {
 				cs.sendMessage(PERMISSIONS_ERROR + " (" + WHITE + permission.toString() + RED + ")");
 			}
@@ -84,7 +83,7 @@ public class CommandBase {
     }
 
     public void sendHelp(CommandSender cs) {
-        cs.sendMessage(RED + "" + ChatColor.BOLD + "Guardian" + ChatColor.DARK_GRAY + " > " + ChatColor.GRAY + "Help Menu");
+        cs.sendMessage(PREFIX + "Help Menu");
         cs.sendMessage(RED + "Usage: " + GRAY + (cs instanceof Player ? "/" : "") + getUsage());
         cs.sendMessage(RED + "Permission: " + GRAY + getPermission().toString());
         for (String string : getHelp()) {
