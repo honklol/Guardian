@@ -33,7 +33,7 @@ public class CommandReload extends CommandBase {
     private static final String USAGE = "guardian reload";
     private static final Permission PERMISSION = Permission.SYSTEM_RELOAD;
     private static final String[] HELP = {
-            GRAY + "Use: " + AQUA + "/guardian reload" + GRAY + " to reload AntiCheat settings",
+            GRAY + "Use: " + AQUA + "/guardian reload" + GRAY + " to reload Guardian settings.",
     };
 
     public CommandReload() {
@@ -43,6 +43,6 @@ public class CommandReload extends CommandBase {
     @Override
     protected void execute(CommandSender cs, String[] args) {
         CONFIG.load();
-        cs.sendMessage(PREFIX + "The configuration was reloaded");
+        cs.sendMessage(PREFIX + "The configuration was reloaded.");
     }
 }

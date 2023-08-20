@@ -44,16 +44,16 @@ public class CommandMute extends CommandBase {
 	@Override
 	protected void execute(CommandSender cs, String[] args) {
 		if (!(cs instanceof Player)) {
-			cs.sendMessage(PREFIX + "This command is only for players");
+			cs.sendMessage(PREFIX + "This command is only for players!");
 			return;
 		}
 		UUID uuid = ((Player) cs).getUniqueId();
 		if (Guardian.MUTE_ENABLED_MODS.contains(uuid)) {
-			cs.sendMessage(PREFIX + "Player alerts have been unmuted");
+			cs.sendMessage(PREFIX + "Player alerts have been unmuted.");
 			Guardian.MUTE_ENABLED_MODS.remove(uuid);
 			return;
 		} else {
-			cs.sendMessage(PREFIX + "Player alerts have been muted");
+			cs.sendMessage(PREFIX + "Player alerts have been muted.");
 			Guardian.MUTE_ENABLED_MODS.add(uuid);
 			return;
 		}
