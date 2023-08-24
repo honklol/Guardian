@@ -84,7 +84,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-file</artifactId>
-                <version>3.4.3</version>
+                <version>3.5.3</version>
             </extension>
         </extensions>
         <resources>
