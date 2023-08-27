@@ -1,4 +1,4 @@
-# <img alt="Guardian's Logo" src="https://raw.githubusercontent.com/HonkJava/Guardian/main/assets/icon-tnb.png" width=22px />  Guardian - Your #1 Free Minecraft Anti-Cheat Plugin
+# <img alt="Guardian's Logo" src="https://raw.githubusercontent.com/HonkJava/Guardian/main/assets/icons/tzb.png" width=22px />  Guardian - Your #1 Free Minecraft Anti-Cheat Plugin
 **Guardian** is a powerful and customizable anti-cheat plugin designed to maintain the integrity and fairness of your Minecraft server. With a range of advanced detection algorithms and configurable settings, Guardian helps you detect and prevent cheating, hacking, and unfair gameplay, ensuring an enjoyable and balanced gaming experience for all players.
 Guardian is a fork of [AntiCheatReloaded](https://github.com/Rammelkast/AntiCheatReloaded), updated for 1.20.1 and actively maintained. Our love goes to Rammelkast for his great work making ACR, creating one of the best free anti-cheats ever. To continue his legacy, we decided to create Guardian - a fresh coat of paint for ACR.
 
