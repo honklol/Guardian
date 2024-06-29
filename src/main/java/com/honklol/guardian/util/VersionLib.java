@@ -126,7 +126,7 @@ public class VersionLib {
 	}
 
 	static {
-		SUPPORTED_VERSIONS = Arrays.asList(new String[] { "v1_20", "v1_19", "v1_18", "v1_17", "v1_16", "v1_15", "v1_14", "v1_13", "v1_12" });
+		SUPPORTED_VERSIONS = Arrays.asList(new String[] { "v1_21", "v1_20", "v1_19", "v1_18", "v1_17", "v1_16", "v1_15", "v1_14", "v1_13", "v1_12" });
 		CURRENT_VERSION = MinecraftVersion.getCurrentVersion();
 	}
 }
